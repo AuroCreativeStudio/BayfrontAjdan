@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: 'IvyMode';
+  src: url('/src/assets/ivy-mode-thin.ttf') format('opentype');
+  font-weight: 100; /* Thin */
+  font-style: normal;
+}
+
