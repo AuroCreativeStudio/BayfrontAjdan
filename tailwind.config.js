@@ -8,7 +8,7 @@ theme: {
   extend: {
     fontFamily: {
       ivy: ['IvyModeThin', 'sans-serif'],
-      foco: ['Foco', 'sans-serif'],
+      foco: ['FocoLight', 'sans-serif'],
     },
   },
 },
