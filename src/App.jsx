@@ -6,6 +6,7 @@ import img4 from "./assets/v05.jpg";
 import img5 from "./assets/v06.jpg";
 import bayfrontLogo from "./assets/logobayfront.png";
 import logo from "./assets/logo.png";
+import image from "./assets/image.png";
 const images = [img1, img2, img3, img4, img5];
 
 const Bayfront = () => {
@@ -52,12 +53,12 @@ const Bayfront = () => {
     <div className={`relative w-full ${isScrollable ? "overflow-y-auto" : "h-screen overflow-hidden"}`}>
       {/* Enquire Button */}
       <div
-        className="fixed left-[-28px] top-1/2 transform -translate-y-1/2 bg-orange-500 text-white px-4 py-1 text-md rotate-[-90deg] cursor-pointer z-50"
+        className="fixed right-[-55px] top-1/2 transform -translate-y-1/2 bg-white text-black px-4 py-1 text-md rotate-90 cursor-pointer z-50"
         onMouseEnter={() => setShowMiniForm(true)}
         onMouseLeave={() => setShowMiniForm(false)}
         onClick={handleFormClick}
       >
-        Enquire
+        ENQUIRE NOW
       </div>
 
       {/* Mini Form on Hover */}
@@ -111,7 +112,7 @@ const Bayfront = () => {
   {/* Left Overlay Content Box */}
   <div className="absolute top-0 left-0 h-[450px] ml-6 w-full md:w-[25%] bg-black/60 p-8 flex flex-col justify-between text-white z-20">
     <div>
-      <h1 className="text-6xl font-ivy md:text-9xl">BAYFRONT</h1>
+      <h1 className="text-6xl font-ivy ml-[-6px] md:text-9xl">BAYFRONT</h1>
       <h2 className="mt-4 text-xl font-ivy text-white md:text-2xl">
         First public beach experience <br /> in Eastern Province
       </h2>
@@ -122,7 +123,7 @@ const Bayfront = () => {
       </p>
 
       {/* Button */}
-      <button className="inline-flex items-center gap-2 px-6 mt-2 font-medium text-white rounded-md shadow-md pointer-events-auto hover:bg-gray-200">
+      <button className="inline-flex items-center gap-2  mt-2 font-medium text-white pointer-events-auto ">
        <svg
   xmlns="http://www.w3.org/2000/svg"
   className="w-5 h-5"
@@ -137,7 +138,7 @@ const Bayfront = () => {
     </div>
   </div>
   
-<div className="absolute top-6 right-0 z-30 flex flex-col items-center space-y-6 font-ivy text-white text-sm">
+<div className="absolute top-12 right-[-12px] z-30 flex flex-col items-center space-y-8 font-ivy text-white text-sm">
   {/* Instagram */}
   <a href="#" className="hover:text-gray-300 rotate-90 origin-center">
     Instagram
@@ -151,13 +152,6 @@ const Bayfront = () => {
     Facebook
   </a>
 
-  {/* Dot Divider */}
-  <div className="w-1 h-1 rounded-full bg-white"></div>
-
-  {/* Website */}
-  <a href="#" className="hover:text-gray-300 rotate-90 origin-center">
-    Website
-  </a>
 </div>
 
 {/* Bottom Left Logos with Divider */}
@@ -257,127 +251,170 @@ const Bayfront = () => {
        {/* SECTION-2 */}
 
 <div className="text-center py-8 ">
-  <h1 className=" text-6xl mb-4 font-ivy">
-    A Curated Coastal Escape Like
+  <h1 className=" text-7xl mb-4 font-ivy">
+    A Curated Coastal Escape Like No Other
   </h1>
-  <p className="text-base leading-relaxed font-foco text-gray-800 max-w-4xl mx-auto">
+  <p className="text-xl leading-relaxed font-foco text-gray-800 max-w-4xl mx-auto">
     Bayfront aims to transform AL Khobar into one of the leading 100 cities worldwide in line with the Saudi 
 Vision 2030. The Blue Flag requirements include global technical and environmental standards that 
 complement the Kingdom’s regard for safety measures, while promoting tourism.
   </p>
+  <button className="border px-4 mt-10 border text-[#480A07] border-[#480A07] py-2">Download Broucher</button>
+</div>
+
+
+       {/* SECTION-3 */}
+
+ <div className="relative w-full h-auto">
+  {/* Background image */}
+  <img
+    src={img3}
+    alt="Land area"
+    className="object-cover w-full h-full"
+  />
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+
+  {/* Overlay text */}
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
+    <h2 className="text-2xl md:text-3xl tracking-widest uppercase">
+      TOTAL LAND AREA
+    </h2>
+
+    <h1 className="mt-2 text-8xl md:text-[200px] font-light">
+      100K+1,6K
+    </h1>
+
+    <p className="mt-2 text-2xl md:text-4xl tracking-wider">
+      SQM
+    </p>
+  </div>
 </div>
 
 
 
-        {/* SECTION 3 - Auto Image Carousel */}
-        <section className="px-6 py-12 bg-gray-50">
-          <div className="flex gap-4 overflow-x-hidden scroll-smooth">
-            {images.map((img, i) => (
-              <img
-                key={i}
-                src={images[(carouselIndex + i) % images.length]}
-                className="w-[350px] h-[240px] object-cover transition duration-500 shrink-0"
-                alt={`Carousel ${i}`}
-              />
-            ))}
-          </div>
-        </section>
-
         {/* SECTION 4 - Staggered 4-Column Gallery */}
-        <section className="px-6 py-16">
-          <h2 className="mb-12 text-3xl font-bold text-center text-black">Gallery</h2>
-          <div className="mx-auto max-w-7xl">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {/* Column 1 */}
-              <div className="space-y-4 md:mt-12">
-                <div className="relative overflow-hidden shadow-lg group h-[300px] md:h-[400px]">
-                  <img
-                    src={img1}
-                    alt="Gallery 1"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-                <div className="relative overflow-hidden shadow-lg group h-[200px] md:h-[250px]">
-                  <img
-                    src={img2}
-                    alt="Gallery 2"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-              </div>
+   <div className="bg-[#8B7261] w-full py-12 md:px-16">
+  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+    
+    {/* Left Content (smaller) */}
+    <div className="text-white md:col-span-5">
+      <p className="text-lg font-foco leading-relaxed">
+        An Almuhaidib Group (AMG) and Ajdan partnership project, BAYFRONT is a
+        world-class seafront transformation that is creating waves as an
+        avant-garde premium destination for Saudi Arabia&apos;s East Coast.
+        Cutting edge architecture, unobstructed sea views, creative placemaking
+        and top of the line amenities align to serve a perfectly curated and
+        unprecedented luxury lifestyle offering.
+      </p>
 
-              {/* Column 2 */}
-              <div className="space-y-4">
-                <div className="relative overflow-hidden shadow-lg group h-[350px] md:h-[500px]">
-                  <img
-                    src={img3}
-                    alt="Gallery 3"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-                <div className="relative overflow-hidden shadow-lg group h-[250px] md:h-[350px]">
-                  <img
-                    src={img4}
-                    alt="Gallery 4"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-              </div>
+      {/* Button */}
+      <button className="mt-6 px-6 py-2 border border-white text-white hover:bg-white hover:text-[#8B7261] transition">
+        Enquire Now
+      </button>
+    </div>
 
-              {/* Column 3 */}
-              <div className="space-y-4">
-                <div className="relative overflow-hidden shadow-lg group h-[200px] md:h-[200px]">
-                  <img
-                    src={img2}
-                    alt="Gallery 5"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-                <div className="relative overflow-hidden shadow-lg group h-[300px] md:h-[450px]">
-                  <img
-                    src={img5}
-                    alt="Gallery 6"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-                <div className="relative overflow-hidden shadow-lg group h-[250px] md:h-[300px]">
-                  <img
-                    src={img1}
-                    alt="Gallery 7"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-              </div>
-
-              {/* Column 4 */}
-              <div className="space-y-4 md:mt-12">
-                <div className="relative overflow-hidden shadow-lg group h-[350px] md:h-[450px]">
-                  <img
-                    src={img2}
-                    alt="Gallery 8"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-                <div className="relative overflow-hidden shadow-lg group h-[200px] md:h-[200px]">
-                  <img
-                    src={img3}
-                    alt="Gallery 9"
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/30 group-hover:opacity-100" />
-                </div>
-              </div>
+    {/* Right Image (larger) */}
+    <div className="md:col-span-7">
+      <img
+        src={image} // replace with your image import
+        alt="Bayfront"
+        className="w-full h-auto object-cover"
+      />
+    </div>
+  </div>
+</div>
+  
+  {/* SECTION 5 */}
+    <main className="bg-white grid justify-items-center [align-items:start] w-screen">
+      <section className="bg-white w-full h-full">
+        <div className="relative h-full top-12px">
+          <div className="absolute w-[1920px] h-[1331px] top-3 left-0">
+            {/* Rectangle image */}
+            <div className="absolute w-[396px] h-[507px] top-[167px] left-0">
+              <img
+                className="absolute w-[396px] h-[507px] top-0 left-0"
+                alt="Bayfront beach resort view"
+                src={img1}
+              />
             </div>
+
+            {/* ClipPath image */}
+            <img
+              className="absolute w-[373px] h-[383px] top-[668px] left-[1547px]"
+              alt="Bayfront resort aerial view"
+              src={img2}
+            />
+
+            {/* Normal image */}
+            <img
+              className="absolute w-[394px] h-80 top-[1010px] left-[520px]"
+              alt="Bayfront beach facilities"
+              src={img3}
+            />
+
+            {/* Rectangle2 */}
+            <img
+              className="absolute w-[494px] h-[564px] top-0 left-[352px]"
+              alt="Bayfront resort interior design"
+              src={img4}
+            />
+
+            {/* Rectangle4 */}
+            <img
+              className="absolute w-[536px] h-[437px] top-[306px] left-[1279px]"
+              alt="Bayfront beachfront view"
+              src={img5}
+            />
+
+            {/* Rectangle5 */}
+            <img
+              className="absolute w-[753px] h-[476px] top-[765px] left-[868px]"
+              alt="Bayfront resort amenities"
+              src={img1}
+            />
+
+            {/* Rectangle6 */}
+            <img
+              className="absolute w-[696px] h-[494px] top-[586px] left-[149px]"
+              alt="Bayfront shoreline experience"
+              src={img2}
+            />
           </div>
-        </section>
+
+          {/* Text block */}
+          <article className="absolute w-[507px] h-[294px] top-0 left-[1296px] mix-blend-multiply opacity-[0.88]">
+            <p className="absolute top-[35px] left-0 font-light text-[#977d68] text-[28.3px] tracking-[1.91px] leading-[34px]">
+              Bayfront brings forward the
+              <br />
+              beach experience the way it is
+              <br />
+              meant to be experienced.
+              <br />
+              Fronting the beautiful Khobar
+              <br />
+              shoreline, the beach at Bayfront
+              <br />
+              falls within a holistic environment
+              <br />
+              where visitors have access to the
+              <br />
+              finest facilities.
+            </p>
+          </article>
+
+          {/* Rectangle3 positioned */}
+          <img
+            className="absolute w-[387px] h-[583px] top-[172px] left-[868px]"
+            alt="Bayfront resort landscape"
+            src={img1}
+          />
+        </div>
+      </section>
+    </main>
+  
+
       </div>
     </div>
   );
