@@ -112,18 +112,18 @@ const Bayfront = () => {
   {/* Left Overlay Content Box */}
   <div className="absolute top-0 left-0 h-[450px] ml-6 w-full md:w-[25%] bg-black/60 p-8 flex flex-col justify-between text-white z-20">
     <div>
-      <h1 className="text-6xl font-ivy ml-[-6px] md:text-9xl">BAYFRONT</h1>
-      <h2 className="mt-4 text-xl font-ivy text-white md:text-2xl">
+      <h1 className="text-[171px] font-ivy ml-[-6px] md:text-9xl">BAYFRONT</h1>
+      <h2 className="mt-4 text-[36px] font-ivy text-white md:text-2xl">
         First public beach experience <br /> in Eastern Province
       </h2>
-      <p className="mt-4 font-foco text-sm leading-relaxed text-gray-200">
+      <p className="mt-4 font-foco text-[17px] font-light leading-relaxed text-gray-200">
         An Almuhaidib Group (AMG) and Ajdan partnership project, BAYFRONT is a
         world-class seafront transformation that is creating waves as an
         avant-garde premium destination for Saudi Arabia&apos;s East Coast.
       </p>
 
       {/* Button */}
-      <button className="inline-flex items-center gap-2  mt-2 font-medium text-white pointer-events-auto ">
+      <button className="inline-flex items-center gap-2  mt-2 font-foco font-bold text-[17px] text-white pointer-events-auto ">
        <svg
   xmlns="http://www.w3.org/2000/svg"
   className="w-5 h-5"
@@ -275,15 +275,15 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 
   {/* Overlay text */}
   <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
-    <h2 className="text-2xl md:text-3xl tracking-widest uppercase">
+    <h2 className="text-[60px] font-foco font-light md:text-3xl tracking-widest uppercase">
       TOTAL LAND AREA
     </h2>
 
-    <h1 className="mt-2 text-8xl md:text-[200px] font-light">
+    <h1 className="mt-2 text-8xl md:text-[256px] font-light font-ivy">
       100K+1,6K
     </h1>
 
-    <p className="mt-2 text-2xl md:text-4xl tracking-wider">
+    <p className="mt-2 text-[85px] fot-foco font-light md:text-4xl tracking-wider">
       SQM
     </p>
   </div>
@@ -291,13 +291,13 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 
 
 
-        {/* SECTION 4 - Staggered 4-Column Gallery */}
-   <div className="bg-[#8B7261] w-full py-12 md:px-16">
-  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        {/* SECTION 4 */}
+ <div className="bg-[#8B7261] w-full py-12 md:px-16">
+  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
     
-    {/* Left Content (smaller) */}
-    <div className="text-white md:col-span-5">
-      <p className="text-lg font-foco leading-relaxed">
+    {/* Left Content (1/3 width) */}
+    <div className="text-white md:col-span-1">
+      <p className="text-[24px] font-foco font-light leading-relaxed">
         An Almuhaidib Group (AMG) and Ajdan partnership project, BAYFRONT is a
         world-class seafront transformation that is creating waves as an
         avant-garde premium destination for Saudi Arabia&apos;s East Coast.
@@ -312,8 +312,8 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
       </button>
     </div>
 
-    {/* Right Image (larger) */}
-    <div className="md:col-span-7">
+    {/* Right Image (2/3 width) */}
+    <div className="md:col-span-2">
       <img
         src={image} // replace with your image import
         alt="Bayfront"
@@ -322,6 +322,7 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
     </div>
   </div>
 </div>
+
   
   {/* SECTION 5 */}
     <main className="bg-white grid justify-items-center [align-items:start] w-screen">
