@@ -175,15 +175,14 @@ const Bayfront = () => {
 </div>
 
 {/* Thumbnails with Carousel Dots */}
-<div className="fixed z-30 pointer-events-auto bottom-4 right-4">
-  {/* Thumbnails row */}
+<div className="absolute z-30 pointer-events-auto bottom-4 right-4">
   <div className="flex gap-2">
     {images.slice(0, 4).map((img, i) => (
       <img
         key={i}
         src={img}
         onClick={(e) => handleThumbClick(img, e, i)}
-        className="object-cover h-24 transition border border-white cursor-pointer w-36 hover:scale-105"
+        className="object-cover h-24 w-36 transition border border-white cursor-pointer hover:scale-105"
         alt={`Thumbnail ${i}`}
       />
     ))}
@@ -202,8 +201,6 @@ const Bayfront = () => {
   </div>
 </div>
 </section>
-
-
 
       {/* Content Below Hero Section */}
       <div 
