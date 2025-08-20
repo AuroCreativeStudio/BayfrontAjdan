@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Home.css";
-import img1 from "./assets/v01.jpg";
-import img2 from "./assets/v02.jpg";
-import img3 from "./assets/v03.jpg";
-import img4 from "./assets/v05.jpg";
-import img5 from "./assets/v06.jpg";
+import img1 from "./assets/sec1.webp";
+import img2 from "./assets/sec2.webp";
+import img4 from "./assets/sec3.webp";
+import img5 from "./assets/sec4.webp";
 import bayfrontLogo from "./assets/logobayfront.png";
 import logo from "./assets/logo.png";
 import image from "./assets/image.png";
@@ -21,7 +20,9 @@ import rectangle3 from "./assets/rectangle (3).png";
 import rectangle4 from "./assets/rectangle (4).png";
 import rectangle5 from "./assets/rectangle (5).png";
 import clippath from "./assets/clip-path-group.png";
-const images = [img1, img2, img3, img4, img5];
+import bayfront from "./assets/bayfront.png";
+import ajdan from "./assets/ajdan.png";
+const images = [img1, img2, img4, img5];
 
 const Bayfront = () => {
   const [bgImage, setBgImage] = useState(images[0]);
@@ -532,82 +533,59 @@ const Bayfront = () => {
             <img src={rectangle1} alt="gallery5" />
           </div>
 
-          {/* Footer section */}
-          <footer className="w-full">
-            {/* Top Section */}
-            <div className="bg-[#8b7261] py-10">
-              <div className=" mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+{/* Footer section */}
+<footer className="w-full">
+  {/* Top Section */}
+  <div className="bg-[#4E8289] py-12">
+    <div className="max-w-[1340px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      {/* Left Logo */}
+      <div className="flex justify-center md:justify-start">
+        <img src={bayfront} alt="Bayfront Logo" className="h-10 md:h-12" />
+      </div>
 
-                {/* Left Logo */}
-                <div className="md:col-span-1 flex flex-col">
-                  <h2 className="text-3xl font-bold text-white font-ivy">BAYFRONT</h2>
-                  <p className="mt-16 text-white font-ivy font-semibold">BY AJDAN</p>
-                </div>
+      {/* Nav Links */}
+      <div className="flex flex-wrap justify-center gap-6 text-white text-sm md:text-base text-center">
+        <a href="#" className="hover:text-gray-200">About Us</a>
+        <a href="#" className="hover:text-gray-200">Location</a>
+        <a href="#" className="hover:text-gray-200">Privacy Policy</a>
+        <a href="#" className="hover:text-gray-200">Terms & Condition</a>
+      </div>
 
-                {/* Location */}
-                <div className="text-white">
-                  <h3 className="font-semibold uppercase mb-3">Location</h3>
-                  <p className="text-sm leading-relaxed">
-                    Lorem ipsum dolor sit amet, <br />
-                    consectetuer adipiscing elit, <br />
-                    sed diam
-                  </p>
-                </div>
+      {/* Social Icons */}
+      <div className="flex justify-center md:justify-end gap-5">
+        <a href="#">
+          <img src={fb} alt="Facebook" className="w-6 h-6 md:w-7 md:h-7" />
+        </a>
+        <a href="#">
+          <img src={insta} alt="Instagram" className="w-6 h-6 md:w-7 md:h-7" />
+        </a>
+        <a href="#">
+          <img src={twitter} alt="Twitter/X" className="w-6 h-6 md:w-7 md:h-7" />
+        </a>
+      </div>
+    </div>
+  </div>
 
-                {/* About Us */}
-                <div className="text-white">
-                  <h3 className="font-semibold uppercase mb-3">About Us</h3>
-                  <p className="text-sm leading-relaxed">
-                    Lorem ipsum dolor sit amet, <br />
-                    consectetuer adipiscing elit, <br />
-                    sed diam
-                  </p>
-                </div>
+  {/* Bottom Bar */}
+  <div className="bg-[#0D3640] py-4">
+    <div className="max-w-[1340px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      {/* Ajdan Logo */}
+      <div className="flex justify-center md:justify-start">
+        <img src={ajdan} alt="Ajdan Logo" className="h-6 md:h-8" />
+      </div>
 
-                {/* Featured Listings */}
-                <div className="text-white">
-                  <h3 className="font-semibold uppercase mb-3">Featured Listings</h3>
-                  <p className="text-sm leading-relaxed">
-                    Lorem ipsum dolor sit amet, <br />
-                    consectetuer adipiscing elit, <br />
-                    sed diam
-                  </p>
-                </div>
+      {/* Copyright Text */}
+      <p className="text-xs md:text-sm text-white text-center md:text-right">
+        © Copyright Ajdan | All Rights Reserved
+      </p>
+    </div>
+  </div>
+</footer>
 
-                {/* Social Media */}
-                <div className="flex justify-start md:justify-end space-x-4">
-                  <a
-                    href="#"
-                    className="w-8 h-8 flex items-center justify-center  text-[#480A07] "
-                  >
-                    <img src={fb} alt="" className="text-[#480A07]" />
 
-                  </a>
-                  <a
-                    href="#"
-                    className="w-8 h-8 flex items-center justify-center text-[#480A07] "
-                  >
-                    <img src={insta} alt="" className="text-[#480A07]" />
 
-                  </a>
-                  <a
-                    href="#"
-                    className="w-8 h-8 flex items-center justify-center text-[#480A07] "
-                  >
-                    <img src={twitter} alt="" className="text-[#480A07]" />
-
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="bg-[#6A4F3D] py-4">
-              <p className="text-center text-sm text-white uppercase tracking-wider">
-                Terms and Conditions | Privacy Policy
-              </p>
-            </div>
-          </footer>
         </div>
 
       </div>
