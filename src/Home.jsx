@@ -7,6 +7,10 @@ import img5 from "./assets/v06.jpg";
 import bayfrontLogo from "./assets/logobayfront.png";
 import logo from "./assets/logo.png";
 import image from "./assets/image.png";
+import whatsapp from "./assets/wa.png";
+import fb from './assets/iconfb.png';
+import insta from './assets/iconinsta.png';
+import twitter from './assets/icontwitter.png';
 const images = [img1, img2, img3, img4, img5];
 
 const Bayfront = () => {
@@ -50,6 +54,7 @@ const Bayfront = () => {
   }, []);
 
   return (
+    <>
     <div className={`relative w-full ${isScrollable ? "overflow-y-auto" : "h-screen overflow-hidden"}`}>
       {/* Enquire Button */}
       <div
@@ -124,14 +129,7 @@ const Bayfront = () => {
 
       {/* Button */}
       <button className="inline-flex items-center gap-2  mt-2 font-foco font-bold text-[17px] text-white pointer-events-auto ">
-       <svg
-  xmlns="http://www.w3.org/2000/svg"
-  className="w-5 h-5"
-  viewBox="0 0 32 32"
-  fill="currentColor"
->
-  <path d="M16.003 3C9.373 3 4 8.373 4 15.003c0 2.653.875 5.102 2.362 7.083L4 29l7.121-2.313A11.946 11.946 0 0016.003 27C22.633 27 28 21.627 28 15.003 28 8.373 22.633 3 16.003 3zm0 21.818a9.774 9.774 0 01-5.003-1.373l-.36-.214-3.963 1.289 1.296-3.844-.235-.374A9.747 9.747 0 016.182 15c0-5.43 4.392-9.818 9.821-9.818 5.427 0 9.818 4.388 9.818 9.818 0 5.429-4.391 9.818-9.818 9.818zm5.362-7.301c-.294-.147-1.74-.86-2.011-.958-.27-.099-.468-.148-.665.147-.197.294-.764.958-.936 1.155-.173.197-.345.222-.64.074-.294-.147-1.242-.458-2.367-1.458-.875-.78-1.465-1.74-1.637-2.034-.173-.294-.018-.453.13-.6.134-.134.294-.345.442-.517.148-.173.197-.296.296-.493.099-.197.05-.37-.025-.517-.074-.147-.665-1.602-.91-2.194-.24-.576-.484-.498-.665-.507-.173-.009-.37-.011-.567-.011s-.517.074-.788.37c-.27.294-1.04 1.016-1.04 2.478s1.065 2.876 1.213 3.074c.148.197 2.096 3.202 5.082 4.489.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.74-.71 1.986-1.396.246-.687.246-1.276.172-1.396-.074-.118-.27-.196-.563-.343z"/>
-</svg>
+      <img src={whatsapp}></img>
 
         Speak to our agents today
       </button>
@@ -262,7 +260,7 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 
        {/* SECTION-3 */}
 
- <div className="relative w-full h-auto">
+<div className="relative w-full h-auto">
   {/* Background image */}
   <img
     src={img3}
@@ -275,15 +273,15 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 
   {/* Overlay text */}
   <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
-    <h2 className="text-[60px] font-foco font-light md:text-3xl tracking-widest uppercase">
+    <h2 className="text-2xl sm:text-3xl md:text-5xl xl:text-6xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase">
       TOTAL LAND AREA
     </h2>
 
-    <h1 className="mt-2 text-8xl md:text-[256px] font-light font-ivy">
+    <h1 className="mt-2 text-5xl sm:text-7xl md:text-[150px] xl:text-[200px] 2xl:text-[256px] font-light font-ivy">
       100K+1,6K
     </h1>
 
-    <p className="mt-2 text-[85px] fot-foco font-light md:text-4xl tracking-wider">
+    <p className="mt-2 text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-[85px] font-foco font-light tracking-wider">
       SQM
     </p>
   </div>
@@ -291,9 +289,10 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 
 
 
+
         {/* SECTION 4 */}
- <div className="bg-[#8B7261] w-full py-12 md:px-16">
-  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+<div className="bg-[#8B7261] w-full py-12">
+  <div className="max-w-[1340px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
     
     {/* Left Content (1/3 width) */}
     <div className="text-white md:col-span-1">
@@ -317,7 +316,16 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
       <img
         src={image} // replace with your image import
         alt="Bayfront"
-        className="w-full h-auto object-cover"
+        className="
+          w-full 
+          h-[280px]     /* default small screen height */
+          sm:h-[320px]  /* slightly bigger on sm */
+          md:h-[400px]  /* medium screen */
+          lg:h-[500px]  /* large screens (your laptop) */
+          xl:h-[550px]  /* xl screen */
+          2xl:h-[600px] /* full HD screen */
+          object-cover
+        "
       />
     </div>
   </div>
@@ -413,9 +421,99 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
     </main>
   
 
-      </div>
-    </div>
-  );
-}
 
-export default App;
+      </div>
+      
+    </div>
+    <footer className="w-full">
+      {/* Top Section */}
+      <div className="bg-[#A48D7B] py-10">
+        <div className="max-w-[1340px] mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+          
+          {/* Left Logo */}
+          <div className="md:col-span-1 flex flex-col">
+            <h2 className="text-3xl font-bold text-white font-ivy">BAYFRONT</h2>
+            <p className="mt-16 text-white font-ivy font-semibold">BY AJDAN</p>
+          </div>
+
+          {/* Location */}
+          <div className="text-white">
+            <h3 className="font-semibold uppercase mb-3">Location</h3>
+            <p className="text-sm leading-relaxed">
+              Lorem ipsum dolor sit amet, <br />
+              consectetuer adipiscing elit, <br />
+              sed diam
+            </p>
+          </div>
+
+          {/* About Us */}
+          <div className="text-white">
+            <h3 className="font-semibold uppercase mb-3">About Us</h3>
+            <p className="text-sm leading-relaxed">
+              Lorem ipsum dolor sit amet, <br />
+              consectetuer adipiscing elit, <br />
+              sed diam
+            </p>
+          </div>
+
+          {/* Featured Listings */}
+          <div className="text-white">
+            <h3 className="font-semibold uppercase mb-3">Featured Listings</h3>
+            <p className="text-sm leading-relaxed">
+              Lorem ipsum dolor sit amet, <br />
+              consectetuer adipiscing elit, <br />
+              sed diam
+            </p>
+          </div>
+
+          {/* Social Media */}
+          <div className="flex justify-start md:justify-end space-x-4">
+            <a
+  href="#"
+  className="w-8 h-8 flex items-center justify-center rounded bg-white"
+>
+  <div
+    className="w-5 h-5 text-[#480A07]"
+    style={{
+      maskImage: `url(${fb})`,
+      WebkitMaskImage: `url(${fb})`,
+      maskRepeat: "no-repeat",
+      WebkitMaskRepeat: "no-repeat",
+      maskPosition: "center",
+      WebkitMaskPosition: "center",
+      maskSize: "contain",
+      WebkitMaskSize: "contain",
+    }}
+  ></div>
+</a>
+
+            <a
+              href="#"
+              className="w-8 h-8 flex items-center justify-center rounded bg-white text-[#480A07] "
+            >
+                <img src={insta} alt="" className="text-[#480A07]" />
+              
+            </a>
+            <a
+              href="#"
+              className="w-8 h-8 flex items-center justify-center rounded bg-white text-[#480A07]"
+            >
+                <img src={twitter} alt="" className="text-[#480A07]" />
+              
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="bg-[#6A4F3D] py-4">
+        <p className="text-center text-sm text-white uppercase tracking-wider">
+          Terms and Conditions | Privacy Policy
+        </p>
+      </div>
+    </footer>
+    </>
+  );
+};
+
+export default Bayfront;
