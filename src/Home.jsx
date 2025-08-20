@@ -258,18 +258,34 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
     Download Broucher
   </button>
 </div>
-
 {/* SECTION-3 */}
-<section className="section-3">
-  <div className="overlay-content">
-    <h2>
-      100K+ <span>TOTAL LAND AREA</span>
+<div className="relative w-full h-auto">
+  {/* Background image */}
+  <img
+    src={img3}
+    alt="Land area"
+    className="object-cover w-full h-full"
+  />
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+
+  {/* Overlay text */}
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
+    <h2 className="text-2xl sm:text-3xl md:text-5xl xl:text-6xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase">
+      TOTAL LAND AREA
     </h2>
-    <h2>
-      1.6K+ <span>UNITS</span>
-    </h2>
+
+    <h1 className="mt-2 text-5xl sm:text-7xl md:text-[150px] xl:text-[200px] 2xl:text-[256px] font-light font-ivy">
+      100K+1,6K
+    </h1>
+
+    <p className="mt-2 text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-[85px] font-foco font-light tracking-wider">
+      SQM
+    </p>
   </div>
-</section>
+</div>
+
 
 
 {/* SECTION 4 */}
