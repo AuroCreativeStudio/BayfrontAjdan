@@ -86,3 +86,10 @@
     font-size: 1.75rem;
   }
 }
+@media (min-width: 1024px) and (max-width: 1300px) {
+  .overlay-custom {
+    height: 520px !important;  /* original 460px → increased */
+    width: 30% !important;     /* original 25% → increased */
+    padding: 2.5rem !important; /* little extra padding */
+  }
+}

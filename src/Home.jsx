@@ -135,25 +135,26 @@ const Bayfront = () => {
           ></div>
 
           {/* Left Overlay Content Box */}
-          <div className="absolute top-0 left-0 h-[450px] ml-6 w-full md:w-[25%] bg-black/60 p-8 flex flex-col justify-between text-white z-20">
-            <div>
-              <h1 className="text-[171px] font-ivy ml-[-6px] md:text-9xl">BAYFRONT</h1>
-              <h2 className="mt-4 text-[36px] font-ivy text-white md:text-2xl">
-                Where Luxury Meets the Sparkle
-                <br /> of the Gulfside Shores
-              </h2>
-              <p className="mt-4 font-foco text-[15px] font-FocoLight  text-gray-200">
-                Welcome to Bayfront, Saudi Arabia’s East Coast masterpiece, where breathtaking Arabian Gulf views, avant-garde architecture,
-                and a luxurious beachfront lifestyle with world-class dining await you.
-              </p>
+          <div className="absolute top-0 left-0 h-[460px] ml-6 w-full md:w-[25%] bg-black/60 p-8 flex flex-col justify-between text-white z-20 overlay-custom">
+  <div>
+    <h1 className="text-[171px] font-ivy ml-[-6px] md:text-9xl">BAYFRONT</h1>
+    <h2 className="mt-4 text-[36px] font-ivy text-white md:text-2xl">
+      Where Luxury Meets the Sparkle
+      <br /> of the Gulfside Shores
+    </h2>
+    <p className="mt-4 font-foco text-[15px] font-FocoLight text-gray-200">
+      Welcome to Bayfront, Saudi Arabia’s East Coast masterpiece, where breathtaking Arabian Gulf views, avant-garde architecture,
+      and a luxurious beachfront lifestyle with world-class dining await you.
+    </p>
 
-              {/* Button */}
-              <button className="inline-flex items-center gap-2 mt-6 font-foco font-bold text-[17px] text-white pointer-events-auto">
-                <img src={whatsapp} alt="whatsapp" />
-                Speak to our agents today
-              </button>
-            </div>
-          </div>
+    {/* Button */}
+    <button className="inline-flex items-center gap-2 mt-3 font-foco font-bold text-[17px] text-white pointer-events-auto">
+      <img src={whatsapp} alt="whatsapp" />
+      Speak to our agents today
+    </button>
+  </div>
+</div>
+
 
           <div className="absolute top-12 right-[-12px] z-30 flex flex-col items-center space-y-8 font-ivy text-white text-sm">
             {/* Instagram */}
