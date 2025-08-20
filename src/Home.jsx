@@ -99,106 +99,46 @@ const Bayfront = () => {
       )}
 
 {/* Hero Section */}
-<section
-  ref={heroSectionRef}
-  className={`relative w-full ${
-    isScrollable ? "h-screen sticky top-0" : "fixed h-screen"
-  }`}
-  onClick={unlockScroll}
->
-  {/* Background */}
-  <div
-    className={`absolute inset-0 bg-cover bg-center transition-all duration-300 ${
-      showFullForm ? "backdrop-blur-md" : ""
-    }`}
-    style={{ backgroundImage: `url(${bgImage})` }}
-  ></div>
+      {/* ---------------- HERO SECTION ---------------- */}
+      <div className="relative w-full">
 
-  {/* Left Overlay Content Box */}
-  <div className="absolute top-0 left-0 h-[450px] ml-6 w-full md:w-[25%] bg-black/60 p-8 flex flex-col justify-between text-white z-20">
-    <div>
-      <h1 className="text-[171px] font-ivy ml-[-6px] md:text-9xl">BAYFRONT</h1>
-      <h2 className="mt-4 text-[36px] font-ivy text-white md:text-2xl">
-        First public beach experience <br /> in Eastern Province
-      </h2>
-      <p className="mt-4 font-foco text-[17px] font-light leading-relaxed text-gray-200">
-        An Almuhaidib Group (AMG) and Ajdan partnership project, BAYFRONT is a
-        world-class seafront transformation that is creating waves as an
-        avant-garde premium destination for Saudi Arabia&apos;s East Coast.
-      </p>
+        {/* Background image slider */}
+        <div className="absolute inset-0">
+          {images.map((img, idx) => (
+            <img
+              key={idx}
+              src={img}
+              alt={`Slide ${idx}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                idx === currentIndex ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
+        </div>
 
-      {/* Button */}
-      <button className="inline-flex items-center gap-2  mt-2 font-foco font-bold text-[17px] text-white pointer-events-auto ">
-      <img src={whatsapp}></img>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-        Speak to our agents today
-      </button>
-    </div>
-  </div>
-  
-<div className="absolute top-12 right-[-12px] z-30 flex flex-col items-center space-y-8 font-ivy text-white text-sm">
-  {/* Instagram */}
-  <a href="#" className="hover:text-gray-300 rotate-90 origin-center">
-    Instagram
-  </a>
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
+          <h1 className="text-4xl md:text-6xl font-ivy font-light tracking-wider uppercase">
+            Welcome to Bayfront
+          </h1>
+          <p className="mt-4 text-lg md:text-2xl font-foco tracking-wide">
+            Luxury living by the sea
+          </p>
+        </div>
 
-  {/* Dot Divider */}
-  <div className="w-1 h-1 rounded-full bg-white"></div>
+        {/* Bottom Left Logo */}
+        <div className="absolute bottom-6 left-6 z-20">
+          <img
+            src={bayfrontLogo}
+            alt="Bayfront Logo"
+            className="h-12 md:h-16 object-contain"
+          />
+        </div>
+      </section>
 
-  {/* Facebook */}
-  <a href="#" className="hover:text-gray-300 rotate-90 origin-center">
-    Facebook
-  </a>
-
-</div>
-
-{/* Bottom Left Logos with Divider */}
-<div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-b from-transparent to-black/80 flex items-center px-12 gap-6">
-  {/* First Logo */}
-  <img
-    src={bayfrontLogo}
-    alt="Bayfront Logo"
-    className="object-contain w-auto h-12"
-  />
-
-  {/* Divider */}
-  <div className="w-[2px] h-8 bg-gray-300"></div>
-
-  {/* Second Logo */}
-  <img
-    src={logo}
-    alt="Logo"
-    className="object-contain w-auto h-12"
-  />
-</div>
-
-{/* Thumbnails with Carousel Dots */}
-<div className="absolute z-30 pointer-events-auto bottom-4 right-4">
-  <div className="flex gap-2">
-    {images.slice(0, 4).map((img, i) => (
-      <img
-        key={i}
-        src={img}
-        onClick={(e) => handleThumbClick(img, e, i)}
-        className="object-cover h-24 w-36 transition border border-white cursor-pointer hover:scale-105"
-        alt={`Thumbnail ${i}`}
-      />
-    ))}
-  </div>
-
-  {/* Carousel dots indicator */}
-  <div className="flex justify-start gap-2 mt-2">
-    {images.slice(0, 4).map((_, i) => (
-      <div
-        key={i}
-        className={`w-2 h-2 rounded-full transition ${
-          i === currentThumbnailIndex ? "bg-white" : "bg-white/50"
-        }`}
-      />
-    ))}
-  </div>
-</div>
-</section>
 
       {/* Content Below Hero Section */}
       <div 
@@ -244,59 +184,67 @@ const Bayfront = () => {
         )}
 
        {/* SECTION-2 */}
-
-<div className="text-center py-8 ">
-  <h1 className=" text-7xl mb-4 font-ivy">
+<div className="text-center py-8 px-4">
+  <h1 className="text-3xl sm:text-5xl md:text-7xl mb-4 font-ivy">
     A Curated Coastal Escape Like No Other
   </h1>
-  <p className="text-xl leading-relaxed font-foco text-gray-800 max-w-4xl mx-auto">
+  <p className="text-base sm:text-lg md:text-xl leading-relaxed font-foco text-gray-800 max-w-4xl mx-auto">
     Bayfront aims to transform AL Khobar into one of the leading 100 cities worldwide in line with the Saudi 
 Vision 2030. The Blue Flag requirements include global technical and environmental standards that 
 complement the Kingdom’s regard for safety measures, while promoting tourism.
   </p>
-  <button className="border px-4 mt-10 border text-[#480A07] border-[#480A07] py-2">Download Broucher</button>
+  <button className="border px-4 mt-10 text-[#480A07] border-[#480A07] py-2">
+    Download Broucher
+  </button>
 </div>
 
+  {/* ---------------- 3rd SECTION (TOTAL LAND AREA) ---------------- */}
+      <section className="relative w-full overflow-hidden">
+        {/* Background image */}
+        <img
+          src={img3}
+          alt="Land area"
+          className="object-cover w-full h-full absolute inset-0"
+        />
 
-       {/* SECTION-3 */}
+        {/* Overlay */}
+        <div className="relative z-10 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4 py-16 md:py-28">
+          <div className="w-full max-w-[90vw] sm:max-w-[80vw] md:max-w-[60vw]">
+            <h2 className="text-sm md:text-xl lg:text-3xl xl:text-4xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase break-words">
+              TOTAL LAND AREA
+            </h2>
 
-<div className="relative w-full h-auto">
-  {/* Background image */}
-  <img
-    src={img3}
-    alt="Land area"
-    className="object-cover w-full h-full"
-  />
+            <h1 className="mt-2 text-3xl sm:text-5xl md:text-7xl lg:text-[80px] xl:text-[120px] 2xl:text-[200px] font-light font-ivy leading-tight break-words">
+              100K+ 1.6K
+            </h1>
 
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-
-  {/* Overlay text */}
-  <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
-    <h2 className="text-2xl sm:text-3xl md:text-5xl xl:text-6xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase">
-      TOTAL LAND AREA
-    </h2>
-
-    <h1 className="mt-2 text-5xl sm:text-7xl md:text-[150px] xl:text-[200px] 2xl:text-[256px] font-light font-ivy">
-      100K+1,6K
-    </h1>
-
-    <p className="mt-2 text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-[85px] font-foco font-light tracking-wider">
-      SQM
-    </p>
-  </div>
-</div>
+            <p className="mt-2 text-base md:text-xl lg:text-3xl xl:text-4xl 2xl:text-[80px] font-foco font-light tracking-wider break-words">
+              SQM
+            </p>
+          </div>
+        </div>
+      </section>
 
 
 
 
-        {/* SECTION 4 */}
-<div className="bg-[#8B7261] w-full py-12">
-  <div className="max-w-[1340px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+
+
+{/* SECTION 4 */}
+<div className="bg-[#8B7261] w-full py-8 sm:py-10 md:py-12 lg:py-16">
+  <div className="max-w-[1340px] mx-2 sm:mx-4 md:mx-8 lg:mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
     
     {/* Left Content (1/3 width) */}
-    <div className="text-white md:col-span-1">
-      <p className="text-[24px] font-foco font-light leading-relaxed">
+    <div className="text-white md:col-span-1 text-center md:text-left">
+      <p className="
+        text-base 
+        sm:text-lg 
+        md:text-xl 
+        lg:text-[22px] 
+        xl:text-[24px] 
+        2xl:text-[24px] 
+        font-foco font-light leading-relaxed
+      ">
         An Almuhaidib Group (AMG) and Ajdan partnership project, BAYFRONT is a
         world-class seafront transformation that is creating waves as an
         avant-garde premium destination for Saudi Arabia&apos;s East Coast.
@@ -306,7 +254,13 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
       </p>
 
       {/* Button */}
-      <button className="mt-6 px-6 py-2 border border-white text-white hover:bg-white hover:text-[#8B7261] transition">
+      <button className="
+        mt-4 sm:mt-5 md:mt-6 lg:mt-8 
+        px-4 sm:px-5 md:px-6 lg:px-8 
+        py-2 sm:py-2.5 md:py-3 
+        border border-white text-white 
+        hover:bg-white hover:text-[#8B7261] transition
+      ">
         Enquire Now
       </button>
     </div>
@@ -318,18 +272,14 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
         alt="Bayfront"
         className="
           w-full 
-          h-[280px]     /* default small screen height */
-          sm:h-[320px]  /* slightly bigger on sm */
-          md:h-[400px]  /* medium screen */
-          lg:h-[500px]  /* large screens (your laptop) */
-          xl:h-[550px]  /* xl screen */
-          2xl:h-[600px] /* full HD screen */
+          h-[240px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[550px] 2xl:h-[600px]
           object-cover
         "
       />
     </div>
   </div>
 </div>
+
 
   
   {/* SECTION 5 */}
@@ -421,11 +371,7 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
     </main>
   
 
-
-      </div>
-      
-    </div>
-    <footer className="w-full">
+   <footer className="w-full">
       {/* Top Section */}
       <div className="bg-[#A48D7B] py-10">
         <div className="max-w-[1340px] mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
@@ -469,24 +415,12 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
           {/* Social Media */}
           <div className="flex justify-start md:justify-end space-x-4">
             <a
-  href="#"
-  className="w-8 h-8 flex items-center justify-center rounded bg-white"
->
-  <div
-    className="w-5 h-5 text-[#480A07]"
-    style={{
-      maskImage: `url(${fb})`,
-      WebkitMaskImage: `url(${fb})`,
-      maskRepeat: "no-repeat",
-      WebkitMaskRepeat: "no-repeat",
-      maskPosition: "center",
-      WebkitMaskPosition: "center",
-      maskSize: "contain",
-      WebkitMaskSize: "contain",
-    }}
-  ></div>
-</a>
-
+              href="#"
+              className="w-8 h-8 flex items-center justify-center rounded bg-white text-[#480A07] "
+            >
+                <img src={fb} alt="" className="text-[#480A07]" />
+              
+            </a>
             <a
               href="#"
               className="w-8 h-8 flex items-center justify-center rounded bg-white text-[#480A07] "
@@ -496,7 +430,7 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
             </a>
             <a
               href="#"
-              className="w-8 h-8 flex items-center justify-center rounded bg-white text-[#480A07]"
+              className="w-8 h-8 flex items-center justify-center rounded bg-white text-[#480A07] "
             >
                 <img src={twitter} alt="" className="text-[#480A07]" />
               
@@ -512,6 +446,10 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
         </p>
       </div>
     </footer>
+      </div>
+      
+    </div>
+  
     </>
   );
 };
