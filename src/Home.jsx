@@ -396,7 +396,7 @@ const Bayfront = () => {
     px-4 sm:px-5 md:px-6 lg:px-8 
     py-2 sm:py-2.5 md:py-3 text-[20px]
     border border-white text-white 
-    hover:bg-white hover:text-[#8B7261] 
+    hover:bg-white hover:text-[#C07D4A] 
     transition 
     font-foco font-medium
   "
@@ -487,7 +487,7 @@ const Bayfront = () => {
 
                     {/* Text block */}
                     <article className="absolute w-[507px] h-[294px] top-0 left-[1296px] mix-blend-multiply opacity-[0.88]">
-                      <p className="absolute top-[25px] left-0 font-FocoLight text-[#977d68] text-[25px]  leading-[34px] pb-[10px]">
+                      <p className="absolute top-[25px] left-0 font-FocoLight text-[#C07D4A] text-[25px]  leading-[34px] pb-[10px]">
                         Framed by the Gulf’s natural beauty,
                         <br />
                         Bayfront seamlessly blends vibrant stores,
@@ -541,7 +541,7 @@ const Bayfront = () => {
       
       {/* Left Logo */}
       <div className="flex justify-center md:justify-start">
-        <img src={bayfront} alt="Bayfront Logo" className="h-10 md:h-12" />
+        <img src={bayfront} alt="Bayfront Logo" className=" md:h-8" />
       </div>
 
       {/* Nav Links */}
