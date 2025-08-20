@@ -342,32 +342,33 @@ const Bayfront = () => {
 
           </div>
           {/* SECTION-3 */}
-          <div className="relative w-full h-auto">
-            {/* Background image */}
-            <img
-              src={section3}
-              alt="Land area"
-              className="object-cover w-full h-full"
-            />
+<div className="relative w-full h-[500px] sm:h-auto">
+  {/* Background image */}
+  <img
+    src={section3}
+    alt="Land area"
+    className="object-cover w-full h-full"
+  />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
 
-            {/* Overlay text */}
-            <div className="absolute inset-0 sm:py-24 flex flex-col items-center justify-center text-white text-center px-4">
-              <h2 className="text-2xl sm:text-3xl md:text-5xl xl:text-6xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase">
-                TOTAL LAND AREA
-              </h2>
+  {/* Overlay text */}
+  <div className="absolute inset-0 sm:py-24 flex flex-col items-center justify-center text-white text-center px-4">
+    <h2 className="text-2xl sm:text-3xl md:text-5xl xl:text-6xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase">
+      TOTAL LAND AREA
+    </h2>
 
-              <h1 className="mt-2 text-5xl sm:text-7xl md:text-[150px] xl:text-[200px] 2xl:text-[256px] font-light font-ivy">
-                100K+1,6K
-              </h1>
+    <h1 className="mt-2 text-5xl sm:text-7xl md:text-[150px] xl:text-[200px] 2xl:text-[256px] font-light font-ivy">
+      100K+1,6K
+    </h1>
 
-              <p className="mt-2 text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-[85px] font-foco font-light tracking-wider">
-                SQM
-              </p>
-            </div>
-          </div>
+    <p className="mt-2 text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-[85px] font-foco font-light tracking-wider">
+      SQM
+    </p>
+  </div>
+</div>
+
 
 
 
@@ -488,7 +489,7 @@ const Bayfront = () => {
 
                     {/* Text block */}
                     <article className="absolute w-[507px] h-[294px] top-0 left-[1296px] mix-blend-multiply opacity-[0.88]">
-                      <p className="absolute top-[25px] left-0 font-FocoLight text-[#C07D4A] text-[25px]  leading-[34px] pb-[10px]">
+                      <p className="absolute top-[25px] left-0 font-foco font-light text-[#C07D4A] text-[25px]  leading-[34px] pb-[10px]">
                         Framed by the Gulf’s natural beauty,
                         <br />
                         Bayfront seamlessly blends vibrant stores,
