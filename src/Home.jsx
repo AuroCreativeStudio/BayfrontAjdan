@@ -6,7 +6,7 @@ import img4 from "./assets/sec3.webp";
 import img5 from "./assets/sec4.webp";
 import bayfrontLogo from "./assets/logobayfront.png";
 import logo from "./assets/logo.png";
-import image from "./assets/image.png";
+import image from "./assets/Project.webp";
 import whatsapp from "./assets/wa.png";
 import fb from './assets/iconfb.png';
 import insta from './assets/iconinsta.png';
@@ -353,7 +353,7 @@ const Bayfront = () => {
             <div className="absolute inset-0 bg-black bg-opacity-20"></div>
 
             {/* Overlay text */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
+            <div className="absolute inset-0 sm:py-24 flex flex-col items-center justify-center text-white text-center px-4">
               <h2 className="text-2xl sm:text-3xl md:text-5xl xl:text-6xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase">
                 TOTAL LAND AREA
               </h2>
