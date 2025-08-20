@@ -349,7 +349,7 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 
 
 {/* SECTION 4 */}
-<div className="bg-[#8B7261] w-full py-8 sm:py-10 md:py-12 lg:py-16">
+<div className="bg-[#8b7261] w-full py-8 sm:py-10 md:py-12 lg:py-16">
   <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
     
     {/* Left Content (1/3 width) */}
@@ -403,7 +403,7 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 {/* Footer section */}
    <footer className="w-full">
       {/* Top Section */}
-      <div className="bg-[#A48D7B] py-10">
+      <div className="bg-[#8b7261] py-10">
         <div className=" mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
           
           {/* Left Logo */}
