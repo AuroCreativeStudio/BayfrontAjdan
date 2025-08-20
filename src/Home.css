@@ -1,0 +1,88 @@
+.section-3 {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* default height for smallest screens */
+  background: url('./assets//v03.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.section-3 .overlay-content h2 {
+  font-size: 1.25rem; /* base font size for very small screens */
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.section-3 .overlay-content h2 span {
+  display: block;
+  font-size: 0.875rem; /* smaller text for span */
+  font-weight: normal;
+}
+
+/* Small screens (sm: ≥640px) */
+@media (min-width: 640px) {
+  .section-3 {
+    height: 65vh;
+  }
+  .section-3 .overlay-content h2 {
+    font-size: 1.5rem;
+  }
+  .section-3 .overlay-content h2 span {
+    font-size: 1rem;
+  }
+}
+
+/* Medium screens (md: ≥768px) */
+@media (min-width: 768px) {
+  .section-3 {
+    height: 70vh;
+  }
+  .section-3 .overlay-content h2 {
+    font-size: 1.75rem;
+  }
+  .section-3 .overlay-content h2 span {
+    font-size: 1.125rem;
+  }
+}
+
+/* Large screens (lg: ≥1024px) */
+@media (min-width: 1024px) {
+  .section-3 {
+    height: 75vh;
+  }
+  .section-3 .overlay-content h2 {
+    font-size: 2rem;
+  }
+  .section-3 .overlay-content h2 span {
+    font-size: 1.25rem;
+  }
+}
+
+/* Extra large screens (xl: ≥1280px) */
+@media (min-width: 1280px) {
+  .section-3 {
+    height: 80vh;
+  }
+  .section-3 .overlay-content h2 {
+    font-size: 2.5rem;
+  }
+  .section-3 .overlay-content h2 span {
+    font-size: 1.5rem;
+  }
+}
+
+/* 2XL screens (2xl: ≥1536px) */
+@media (min-width: 1536px) {
+  .section-3 {
+    height: 85vh;
+  }
+  .section-3 .overlay-content h2 {
+    font-size: 3rem;
+  }
+  .section-3 .overlay-content h2 span {
+    font-size: 1.75rem;
+  }
+}

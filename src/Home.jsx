@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./Home.css";
 import img1 from "./assets/v01.jpg";
 import img2 from "./assets/v02.jpg";
 import img3 from "./assets/v03.jpg";
@@ -99,46 +100,106 @@ const Bayfront = () => {
       )}
 
 {/* Hero Section */}
-      {/* ---------------- HERO SECTION ---------------- */}
-      <div className="relative w-full">
+<section
+  ref={heroSectionRef}
+  className={`relative w-full ${
+    isScrollable ? "h-screen sticky top-0" : "fixed h-screen"
+  }`}
+  onClick={unlockScroll}
+>
+  {/* Background */}
+  <div
+    className={`absolute inset-0 bg-cover bg-center transition-all duration-300 ${
+      showFullForm ? "backdrop-blur-md" : ""
+    }`}
+    style={{ backgroundImage: `url(${bgImage})` }}
+  ></div>
 
-        {/* Background image slider */}
-        <div className="absolute inset-0">
-          {images.map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`Slide ${idx}`}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                idx === currentIndex ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          ))}
-        </div>
+  {/* Left Overlay Content Box */}
+  <div className="absolute top-0 left-0 h-[450px] ml-6 w-full md:w-[25%] bg-black/60 p-8 flex flex-col justify-between text-white z-20">
+    <div>
+      <h1 className="text-[171px] font-ivy ml-[-6px] md:text-9xl">BAYFRONT</h1>
+      <h2 className="mt-4 text-[36px] font-ivy text-white md:text-2xl">
+        First public beach experience <br /> in Eastern Province
+      </h2>
+      <p className="mt-4 font-foco text-[17px] font-light leading-relaxed text-gray-200">
+        An Almuhaidib Group (AMG) and Ajdan partnership project, BAYFRONT is a
+        world-class seafront transformation that is creating waves as an
+        avant-garde premium destination for Saudi Arabia&apos;s East Coast.
+      </p>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50"></div>
+      {/* Button */}
+      <button className="inline-flex items-center gap-2  mt-2 font-foco font-bold text-[17px] text-white pointer-events-auto ">
+      <img src={whatsapp}></img>
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-ivy font-light tracking-wider uppercase">
-            Welcome to Bayfront
-          </h1>
-          <p className="mt-4 text-lg md:text-2xl font-foco tracking-wide">
-            Luxury living by the sea
-          </p>
-        </div>
+        Speak to our agents today
+      </button>
+    </div>
+  </div>
+  
+<div className="absolute top-12 right-[-12px] z-30 flex flex-col items-center space-y-8 font-ivy text-white text-sm">
+  {/* Instagram */}
+  <a href="#" className="hover:text-gray-300 rotate-90 origin-center">
+    Instagram
+  </a>
 
-        {/* Bottom Left Logo */}
-        <div className="absolute bottom-6 left-6 z-20">
-          <img
-            src={bayfrontLogo}
-            alt="Bayfront Logo"
-            className="h-12 md:h-16 object-contain"
-          />
-        </div>
-      </section>
+  {/* Dot Divider */}
+  <div className="w-1 h-1 rounded-full bg-white"></div>
 
+  {/* Facebook */}
+  <a href="#" className="hover:text-gray-300 rotate-90 origin-center">
+    Facebook
+  </a>
+
+</div>
+
+{/* Bottom Left Logos with Divider */}
+<div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-b from-transparent to-black/80 flex items-center px-12 gap-6">
+  {/* First Logo */}
+  <img
+    src={bayfrontLogo}
+    alt="Bayfront Logo"
+    className="object-contain w-auto h-12"
+  />
+
+  {/* Divider */}
+  <div className="w-[2px] h-8 bg-gray-300"></div>
+
+  {/* Second Logo */}
+  <img
+    src={logo}
+    alt="Logo"
+    className="object-contain w-auto h-12"
+  />
+</div>
+
+{/* Thumbnails with Carousel Dots */}
+<div className="absolute z-30 pointer-events-auto bottom-4 right-4">
+  <div className="flex gap-2">
+    {images.slice(0, 4).map((img, i) => (
+      <img
+        key={i}
+        src={img}
+        onClick={(e) => handleThumbClick(img, e, i)}
+        className="object-cover h-24 w-36 transition border border-white cursor-pointer hover:scale-105"
+        alt={`Thumbnail ${i}`}
+      />
+    ))}
+  </div>
+
+  {/* Carousel dots indicator */}
+  <div className="flex justify-start gap-2 mt-2">
+    {images.slice(0, 4).map((_, i) => (
+      <div
+        key={i}
+        className={`w-2 h-2 rounded-full transition ${
+          i === currentThumbnailIndex ? "bg-white" : "bg-white/50"
+        }`}
+      />
+    ))}
+  </div>
+</div>
+</section>
 
       {/* Content Below Hero Section */}
       <div 
@@ -198,36 +259,17 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
   </button>
 </div>
 
-  {/* ---------------- 3rd SECTION (TOTAL LAND AREA) ---------------- */}
-      <section className="relative w-full overflow-hidden">
-        {/* Background image */}
-        <img
-          src={img3}
-          alt="Land area"
-          className="object-cover w-full h-full absolute inset-0"
-        />
-
-        {/* Overlay */}
-        <div className="relative z-10 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4 py-16 md:py-28">
-          <div className="w-full max-w-[90vw] sm:max-w-[80vw] md:max-w-[60vw]">
-            <h2 className="text-sm md:text-xl lg:text-3xl xl:text-4xl 2xl:text-[60px] font-foco font-light tracking-widest uppercase break-words">
-              TOTAL LAND AREA
-            </h2>
-
-            <h1 className="mt-2 text-3xl sm:text-5xl md:text-7xl lg:text-[80px] xl:text-[120px] 2xl:text-[200px] font-light font-ivy leading-tight break-words">
-              100K+ 1.6K
-            </h1>
-
-            <p className="mt-2 text-base md:text-xl lg:text-3xl xl:text-4xl 2xl:text-[80px] font-foco font-light tracking-wider break-words">
-              SQM
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-
-
+{/* SECTION-3 */}
+<section className="section-3">
+  <div className="overlay-content">
+    <h2>
+      100K+ <span>TOTAL LAND AREA</span>
+    </h2>
+    <h2>
+      1.6K+ <span>UNITS</span>
+    </h2>
+  </div>
+</section>
 
 
 {/* SECTION 4 */}
@@ -370,7 +412,7 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
       </section>
     </main>
   
-
+{/* Footer section */}
    <footer className="w-full">
       {/* Top Section */}
       <div className="bg-[#A48D7B] py-10">
