@@ -15,3 +15,52 @@
   font-weight: 100; /* thin */
   font-style: normal;
 }
+.artboard-wrapper {
+  width: 100%;
+  max-width: 1920px;
+  aspect-ratio: 1920 / 1331; /* keeps proportions, no fixed height */
+  position: relative;
+  margin-top:50px;
+}
+
+.artboard {
+  width: 1920px;
+  height: 1331px;
+  transform-origin: top left;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .artboard-wrapper {
+    aspect-ratio: auto;
+    margin-top: 20px;
+  }
+
+  .artboard {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .mobile-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding:10px 10px;
+  }
+
+  .mobile-layout img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .mobile-text {
+    text-align: center;
+    padding: 15px;
+  }
+}
