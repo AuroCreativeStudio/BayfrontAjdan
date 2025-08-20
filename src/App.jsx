@@ -7,15 +7,25 @@ import img5 from "./assets/v06.jpg";
 import bayfrontLogo from "./assets/logobayfront.png";
 import logo from "./assets/logo.png";
 import image from "./assets/image.png";
+import vector from "./assets/vector.png";
+import rectangle from "./assets/rectangle.png";
+import rectangle1 from "./assets/rectangle (1).png";
+import rectangle2 from "./assets/rectangle (2).png";
+import rectangle3 from "./assets/rectangle (3).png";
+import rectangle4 from "./assets/rectangle (4).png";
+import rectangle5 from "./assets/rectangle (5).png";
+import clippath from "./assets/clip-path-group.png";
 const images = [img1, img2, img3, img4, img5];
 
-const Bayfront = () => {
+const App= () => {
   const [bgImage, setBgImage] = useState(images[0]);
   const [showMiniForm, setShowMiniForm] = useState(false);
   const [showFullForm, setShowFullForm] = useState(false);
   const [isScrollable, setIsScrollable] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [currentThumbnailIndex, setCurrentThumbnailIndex] = useState(0);
+
+  const [artboardScale, setArtboardScale] = useState(1);
   const heroSectionRef = useRef(null);
   const contentSectionRef = useRef(null);
 
@@ -48,7 +58,16 @@ const Bayfront = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-
+  useEffect(() => {
+    const handleResize = () => {
+      const baseWidth = 1920;
+      const winWidth = window.innerWidth;
+      setArtboardScale(winWidth < baseWidth ? winWidth / baseWidth : 1);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div className={`relative w-full ${isScrollable ? "overflow-y-auto" : "h-screen overflow-hidden"}`}>
       {/* Enquire Button */}
@@ -325,92 +344,102 @@ complement the Kingdom’s regard for safety measures, while promoting tourism.
 
   
   {/* SECTION 5 */}
-    <main className="bg-white grid justify-items-center [align-items:start] w-screen">
-      <section className="bg-white w-full h-full">
-        <div className="relative h-full top-12px">
-          <div className="absolute w-[1920px] h-[1331px] top-3 left-0">
-            {/* Rectangle image */}
-            <div className="absolute w-[396px] h-[507px] top-[167px] left-0">
-              <img
-                className="absolute w-[396px] h-[507px] top-0 left-0"
-                alt="Bayfront beach resort view"
-                src={img1}
-              />
-            </div>
+<div className="w-full overflow-x-hidden flex justify-center">
+          <main className="bg-white grid justify-items-center [align-items:start] w-full">
+            <section className="bg-white w-full h-full flex justify-center">
+              <div
+                className="relative artboard"
+                style={{
+                  width: 1920,
+                  height: 1331,
+                  transform: `scale(${artboardScale})`,
+                  transformOrigin: "top left",
+                }}
+              >
+                <div className="absolute w-full h-full top-0 left-0">
+                  {/* Rectangle image */}
+                  <div className="absolute w-[396px] h-[507px] top-[167px] left-0">
+                    <img
+                      className="absolute w-[396px] h-[507px] top-0 left-0"
+                      alt="Bayfront beach resort view"
+                      src={clippath}
+                    />
+                  </div>
 
-            {/* ClipPath image */}
-            <img
-              className="absolute w-[373px] h-[383px] top-[668px] left-[1547px]"
-              alt="Bayfront resort aerial view"
-              src={img2}
-            />
+                  {/* ClipPath image */}
+                  <img
+                    className="absolute w-[373px] h-[383px] top-[668px] left-[1547px]"
+                    alt="Bayfront resort aerial view"
+                    src={rectangle}
+                  />
 
-            {/* Normal image */}
-            <img
-              className="absolute w-[394px] h-80 top-[1010px] left-[520px]"
-              alt="Bayfront beach facilities"
-              src={img3}
-            />
+                  {/* Normal image */}
+                  <img
+                    className="absolute w-[394px] h-80 top-[1010px] left-[520px]"
+                    alt="Bayfront beach facilities"
+                    src={vector}
+                  />
 
-            {/* Rectangle2 */}
-            <img
-              className="absolute w-[494px] h-[564px] top-0 left-[352px]"
-              alt="Bayfront resort interior design"
-              src={img4}
-            />
+                  {/* Rectangle2 */}
+                  <img
+                    className="absolute w-[494px] h-[564px] top-0 left-[352px]"
+                    alt="Bayfront resort interior design"
+                    src={rectangle5}
+                  />
 
-            {/* Rectangle4 */}
-            <img
-              className="absolute w-[536px] h-[437px] top-[306px] left-[1279px]"
-              alt="Bayfront beachfront view"
-              src={img5}
-            />
+                  {/* Rectangle4 */}
+                  <img
+                    className="absolute w-[536px] h-[437px] top-[306px] left-[1279px]"
+                    alt="Bayfront beachfront view"
+                    src={rectangle2}
+                  />
 
-            {/* Rectangle5 */}
-            <img
-              className="absolute w-[753px] h-[476px] top-[765px] left-[868px]"
-              alt="Bayfront resort amenities"
-              src={img1}
-            />
+                  {/* Rectangle5 */}
+                  <img
+                    className="absolute w-[753px] h-[476px] top-[765px] left-[868px]"
+                    alt="Bayfront resort amenities"
+                    src={rectangle4}
+                  />
 
-            {/* Rectangle6 */}
-            <img
-              className="absolute w-[696px] h-[494px] top-[586px] left-[149px]"
-              alt="Bayfront shoreline experience"
-              src={img2}
-            />
-          </div>
+                  {/* Rectangle6 */}
+                  <img
+                    className="absolute w-[696px] h-[494px] top-[586px] left-[149px]"
+                    alt="Bayfront shoreline experience"
+                    src={rectangle3}
+                  />
+                </div>
 
-          {/* Text block */}
-          <article className="absolute w-[507px] h-[294px] top-0 left-[1296px] mix-blend-multiply opacity-[0.88]">
-            <p className="absolute top-[35px] left-0 font-light text-[#977d68] text-[28.3px] tracking-[1.91px] leading-[34px]">
-              Bayfront brings forward the
-              <br />
-              beach experience the way it is
-              <br />
-              meant to be experienced.
-              <br />
-              Fronting the beautiful Khobar
-              <br />
-              shoreline, the beach at Bayfront
-              <br />
-              falls within a holistic environment
-              <br />
-              where visitors have access to the
-              <br />
-              finest facilities.
-            </p>
-          </article>
+                {/* Text block */}
+                <article className="absolute w-[507px] h-[294px] top-0 left-[1296px] mix-blend-multiply opacity-[0.88]">
+                  <p className="absolute top-[35px] left-0 font-light text-[#977d68] text-[28.3px] tracking-[1.91px] leading-[34px]">
+                    Bayfront brings forward the
+                    <br />
+                    beach experience the way it is
+                    <br />
+                    meant to be experienced.
+                    <br />
+                    Fronting the beautiful Khobar
+                    <br />
+                    shoreline, the beach at Bayfront
+                    <br />
+                    falls within a holistic environment
+                    <br />
+                    where visitors have access to the
+                    <br />
+                    finest facilities.
+                  </p>
+                </article>
 
-          {/* Rectangle3 positioned */}
-          <img
-            className="absolute w-[387px] h-[583px] top-[172px] left-[868px]"
-            alt="Bayfront resort landscape"
-            src={img1}
-          />
+                {/* Rectangle3 positioned */}
+                <img
+                  className="absolute w-[387px] h-[583px] top-[172px] left-[868px]"
+                  alt="Bayfront resort landscape"
+                  src={rectangle1}
+                />
+              </div>
+            </section>
+          </main>
         </div>
-      </section>
-    </main>
   
 
       </div>
