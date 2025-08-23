@@ -20,9 +20,29 @@ import rectangle3 from "./assets/rectangle (3).png";
 import rectangle4 from "./assets/rectangle (4).png";
 import rectangle5 from "./assets/rectangle (5).png";
 import clippath from "./assets/clip-path-group.png";
-import bayfront from "./assets/bayfront.png";
-import ajdan from "./assets/ajdan.png";
+import { motion, AnimatePresence } from "framer-motion";
+import enquire from "./assets/enquiresec.webp"
+
+import CountUp, { useCountUp } from "react-countup";
+
 const images = [img1, img2, img4, img5];
+
+// CarouselSlider child component
+const CarouselSlider = ({ images, currentIndex }) => (
+  <div className="relative w-full h-full overflow-hidden">
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentIndex} // triggers animation on index change
+        initial={{ opacity: 0, scale: 1.05 }} // start slightly zoomed in and transparent
+        animate={{ opacity: 1, scale: 1 }}    // fade in and normalize scale
+        exit={{ opacity: 0, scale: 1.05 }}    // fade out and slightly zoomed
+        transition={{ duration: 0.7, ease: "easeInOut" }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${images[currentIndex]})` }}
+      />
+    </AnimatePresence>
+  </div>
+);
 
 const Bayfront = () => {
   const [bgImage, setBgImage] = useState(images[0]);
@@ -32,16 +52,26 @@ const Bayfront = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [artboardScale, setArtboardScale] = useState(1);
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [isEnquireHover, setIsEnquireHover] = useState(false);
 
-  const [currentThumbnailIndex, setCurrentThumbnailIndex] = useState(0);
   const heroSectionRef = useRef(null);
   const contentSectionRef = useRef(null);
+  const countRef = useRef(null);
 
-  const handleThumbClick = (img, e, index) => {
-    e.stopPropagation();
-    setBgImage(img);
-    setCurrentThumbnailIndex(index);
-  };
+  useCountUp({
+    ref: countRef,
+    start: 1,
+    end: 100,
+    duration: 5,
+    suffix: "K",
+    enableScrollSpy: true,
+    scrollSpyOnce: true,
+  });
+  // const handleThumbClick = (img, e, index) => {
+  //   e.stopPropagation();
+  //   setBgImage(img);
+  //   setCurrentThumbnailIndex(index);
+  // };
 
   const unlockScroll = () => {
     setIsScrollable(true);
@@ -60,12 +90,24 @@ const Bayfront = () => {
     setShowMiniForm(false);
   };
 
+  // Auto-scroll effect
   useEffect(() => {
     const interval = setInterval(() => {
       setCarouselIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  // Thumbnail click handler
+  const handleThumbClick = (index, e) => {
+    e.stopPropagation();
+    setCarouselIndex(index);
+  };
+
+  useEffect(() => {
+    setBgImage(images[carouselIndex]);
+  }, [carouselIndex]);
+
   useEffect(() => {
     const handleResize = () => {
       const baseWidth = 1920;
@@ -96,7 +138,7 @@ const Bayfront = () => {
         {/* Mini Form on Hover */}
         {showMiniForm && !showFullForm && (
           <div
-            className="fixed z-50 w-48 p-3 transform -translate-y-1/2 bg-white shadow-md left-12 top-1/2"
+            className="fixed z-50 w-48 p-3 transform -translate-y-1/2 bg-white shadow-md right-12 top-1/2"
             onMouseEnter={() => setShowMiniForm(true)}
             onMouseLeave={() => setShowMiniForm(false)}
             onClick={(e) => e.stopPropagation()}
@@ -112,7 +154,7 @@ const Bayfront = () => {
               placeholder="Email"
               onClick={(e) => e.stopPropagation()}
             />
-            
+
             <button
               className="w-full px-3 py-1 mt-2 text-xs font-foco text-white bg-[#0d202e]"
               onClick={(e) => {
@@ -134,20 +176,20 @@ const Bayfront = () => {
           }`}
           onClick={unlockScroll}
         >
-          {/* Background */}
-          <div
-            className={`absolute inset-0 bg-cover bg-center transition-all duration-300 ${
-              showFullForm ? "backdrop-blur-md" : ""
-            }`}
-            style={{ backgroundImage: `url(${bgImage})` }}
-          ></div>
+          {/* CarouselSlider as child */}
+          <CarouselSlider images={images} currentIndex={carouselIndex} />
 
           {/* Left Overlay Content Box */}
           <div className="absolute top-0 left-0 h-[460px] ml-6 w-full md:w-[25%] bg-black/60 p-8 flex flex-col justify-between text-white z-20 overlay-custom">
             <div>
-              <h1 className="text-[171px] font-ivy ml-[-6px] md:text-9xl">
+              <motion.h1
+                className="text-[171px] font-ivy ml-[-6px] md:text-9xl"
+                initial={{ x: 300, opacity: 0 }} // start 300px to the right, invisible
+                animate={{ x: 0, opacity: 1 }} // slide to original position, fully visible
+                transition={{ duration: 1.5, ease: "easeOut" }} // duration & easing
+              >
                 BAYFRONT
-              </h1>
+              </motion.h1>
               <h2 className="mt-4 text-[36px] font-ivy text-white md:text-2xl">
                 Where Luxury Meets the Sparkle
                 <br /> of the Gulfside Shores
@@ -205,14 +247,18 @@ const Bayfront = () => {
           </div>
 
           {/* Thumbnails with Carousel Dots */}
-          <div className="absolute z-30 pointer-events-auto bottom-4 right-4">
+          <div className="absolute z-30 pointer-events-auto bottom-4 right-4 ">
             <div className="flex gap-2">
-              {images.slice(0, 4).map((img, i) => (
+              {images.map((img, i) => (
                 <img
                   key={i}
                   src={img}
-                  onClick={(e) => handleThumbClick(img, e, i)}
-                  className="object-cover h-24 w-36 transition border border-white cursor-pointer hover:scale-105"
+                  onClick={(e) => handleThumbClick(i, e)}
+                  className={`object-cover h-24 w-36 border cursor-pointer transition
+                    ${i === carouselIndex
+                    ? "scale-105 border-2 border-white"
+                    : "border-white/50 opacity-80 hover:opacity-100"
+                  }`}
                   alt={`Thumbnail ${i}`}
                 />
               ))}
@@ -220,11 +266,11 @@ const Bayfront = () => {
 
             {/* Carousel dots indicator */}
             <div className="flex justify-start gap-2 mt-2">
-              {images.slice(0, 4).map((_, i) => (
+              {images.map((_, i) => (
                 <div
                   key={i}
                   className={`w-2 h-2 rounded-full transition ${
-                    i === currentThumbnailIndex ? "bg-white" : "bg-white/50"
+                    i === carouselIndex ? "bg-white" : "bg-white/50"
                   }`}
                 />
               ))}
@@ -240,14 +286,8 @@ const Bayfront = () => {
           }`}
           onClick={unlockScroll}
         >
-          {/* Background with Full Overlay */}
-          <div
-            className={`absolute inset-0 bg-cover bg-center transition-all duration-300`}
-            style={{ backgroundImage: `url(${bgImage})` }}
-          >
-            {/* Full Overlay */}
-            <div className="absolute inset-0 bg-black/50"></div>
-          </div>
+          {/* CarouselSlider as child */}
+          <CarouselSlider images={images} currentIndex={carouselIndex} />
 
           {/* Content Centered */}
           <div className="relative z-20 flex flex-col justify-start pt-12 items-center text-center text-white px-6 h-full md:h-auto">
@@ -264,15 +304,15 @@ const Bayfront = () => {
             </p>
 
             {/* Button */}
-                         <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-3 font-foco font-bold text-[17px] text-white pointer-events-auto"
-              >
-                <img src={whatsapp} alt="whatsapp" />
-                Speak to our agents today
-              </a>
+            <a
+              href="https://wa.me/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-3 font-foco font-bold text-[17px] text-white pointer-events-auto"
+            >
+              <img src={whatsapp} alt="whatsapp" />
+              Speak to our agents today
+            </a>
           </div>
 
           {/* Logos above thumbnails */}
@@ -286,15 +326,16 @@ const Bayfront = () => {
             <img src={logo} alt="Logo" className="h-8 sm:h-10" />
           </div>
 
-          {/* Thumbnails with Carousel Dots */}
+          {/* Thumbnails with Carousel Dots (parent) */}
           <div className="absolute z-30 pointer-events-auto bottom-4 right-4">
             <div className="flex gap-2">
-              {images.slice(0, 4).map((img, i) => (
+              {images.map((img, i) => (
                 <img
                   key={i}
                   src={img}
-                  onClick={(e) => handleThumbClick(img, e, i)}
-                  className="object-cover h-16 w-24 transition border border-white cursor-pointer hover:scale-105 sm:h-20 sm:w-28 md:h-24 md:w-36"
+                  onClick={(e) => handleThumbClick(i, e)}
+                  className={`object-cover h-16 w-24 transition border border-white cursor-pointer hover:scale-105 sm:h-20 sm:w-28 md:h-24 md:w-36
+    ${i === carouselIndex ? "scale-105 border-2" : ""}`}
                   alt={`Thumbnail ${i}`}
                 />
               ))}
@@ -302,11 +343,11 @@ const Bayfront = () => {
 
             {/* Carousel dots indicator */}
             <div className="flex justify-start gap-2 mt-2">
-              {images.slice(0, 4).map((_, i) => (
+              {images.map((_, i) => (
                 <div
                   key={i}
                   className={`w-2 h-2 rounded-full transition ${
-                    i === currentThumbnailIndex ? "bg-white" : "bg-white/50"
+                    i === carouselIndex ? "bg-white" : "bg-white/50"
                   }`}
                 />
               ))}
@@ -322,60 +363,78 @@ const Bayfront = () => {
           }`}
         >
           {/* Full Enquiry Form */}
-          {showFullForm && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center">
-              <div
-                className="absolute inset-0 backdrop-blur-sm bg-black/50"
-                onClick={() => setShowFullForm(false)}
-              ></div>
+         <AnimatePresence>
+  {showFullForm && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Background overlay */}
+      <div
+        className="absolute inset-0 backdrop-blur-sm bg-black/50"
+        onClick={() => setShowFullForm(false)}
+      ></div>
 
-              <div
-                className="bg-white p-6 w-96 max-w-[90%] relative z-50"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  onClick={() => setShowFullForm(false)}
-                  className="absolute text-xl text-black top-2 right-2"
-                >
-                  ×
-                </button>
-                <h2 className="mb-4 text-lg font-foco font-bold text-black">
-                  Enquiry Form
-                </h2>
-                <input
-                  className="w-full p-2 mb-3 text-sm font-foco border"
-                  placeholder="Property Title"
-                  value="Bayfront"
-                  readOnly
-                />
-                <input
-                  className="w-full p-2 mb-3 text-sm font-foco border"
-                  placeholder="Name"
-                />
-                <input
-                  className="w-full p-2 mb-3 text-sm font-foco border"
-                  placeholder="Email"
-                />
-                <input
-                  className="w-full p-2 mb-3 text-sm font-foco border"
-                  placeholder="Phone"
-                />
-                <textarea
-                  className="w-full p-2 text-sm font-foco border"
-                  placeholder="Message"
-                />
-                <button className="w-full px-4 py-2 mt-3 text-sm text-white bg-[#0d202e]">
-                  Submit
-                </button>
-              </div>
-            </div>
-          )}
+      {/* Animated Form */}
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}     // start small & hidden
+        animate={{ scale: 1, opacity: 1 }}       // grow to full size & visible
+        exit={{ scale: 0.5, opacity: 0 }}        // shrink back when closing
+        transition={{ duration: 0.4, ease: "easeOut" }} // smooth animation
+        className="bg-white p-6 w-96 max-w-[90%] relative z-50 rounded-lg shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={() => setShowFullForm(false)}
+          className="absolute text-xl text-black top-2 right-2"
+        >
+          ×
+        </button>
+        <h2 className="mb-4 text-lg font-foco font-bold text-black">
+          Enquiry Form
+        </h2>
+        <input
+          className="w-full p-2 mb-3 text-sm font-foco border"
+          placeholder="Property Title"
+          value="Bayfront"
+          readOnly
+        />
+        <input
+          className="w-full p-2 mb-3 text-sm font-foco border"
+          placeholder="Name"
+        />
+        <input
+          className="w-full p-2 mb-3 text-sm font-foco border"
+          placeholder="Email"
+        />
+        <input
+          className="w-full p-2 mb-3 text-sm font-foco border"
+          placeholder="Phone"
+        />
+        <textarea
+          className="w-full p-2 text-sm font-foco border"
+          placeholder="Message"
+        />
+        <button className="w-full px-4 py-2 mt-3 text-sm text-white bg-[#0d202e]">
+          Submit
+        </button>
+      </motion.div>
+    </div>
+  )}
+</AnimatePresence>
+
 
           {/* SECTION-2 */}
           <div className="text-center py-16 px-4">
             <h1 className="text-3xl sm:text-5xl md:text-7xl mb-4 font-ivy">
-              A Signature Standard in Seafront Luxury{" "}
+              <motion.span
+                initial={{ y: -100, opacity: 0 }} // start 100px above, invisible
+                whileInView={{ y: 0, opacity: 1 }} // slide down to original position
+                viewport={{ once: true, amount: 0.5 }} // triggers when 50% visible
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="block"
+              >
+                A Signature Standard in Seafront Luxury
+              </motion.span>
             </h1>
+
             <p className="text-base sm:text-lg md:text-xl leading-relaxed font-foco text-gray-800 max-w-4xl mx-auto">
               Bayfront sets a new standard for Saudi Arabia’s East Coast with
               avant-garde design, world-class seafront amenities, and sweeping
@@ -390,15 +449,26 @@ const Bayfront = () => {
               rel="noopener noreferrer"
             >
               <button
-                className="mt-4 sm:mt-5 md:mt-6 lg:mt-8 
+                className="relative mt-4 sm:mt-5 md:mt-6 lg:mt-8 
     px-4 sm:px-5 md:px-6 lg:px-8 
     py-2 sm:py-2.5 md:py-3 text-[20px]
     border border-[#C07D4A] text-[#C07D4A]
-    hover:bg-[#C07D4A] hover:text-[#ffffff] 
-    transition 
-    font-foco font-medium"
+    overflow-hidden
+    font-foco font-medium
+    transition-colors duration-500
+    hover:text-white
+    group"
               >
-                Download Brochure
+                <span className="relative z-10">Download Brochure</span>
+
+                {/* Half-circle animation */}
+                <span
+                  className="absolute left-1/2 bottom-0 w-[200%] h-[200%] 
+    bg-[#C07D4A] rounded-full 
+    -translate-x-1/2 translate-y-full 
+    transition-transform duration-700 ease-out 
+    group-hover:translate-y-1/2"
+                />
               </button>
             </a>
           </div>
@@ -421,9 +491,8 @@ const Bayfront = () => {
               </h2>
 
               <h1 className="mt-2 text-5xl sm:text-7xl md:text-[150px] xl:text-[200px] 2xl:text-[256px] font-light font-ivy">
-                100K+1,6K
+                <span ref={countRef} /> +1,6K
               </h1>
-
               <p className="mt-2 text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-[85px] font-foco font-light tracking-wider">
                 SQM
               </p>
@@ -435,17 +504,14 @@ const Bayfront = () => {
             <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
               {/* Left Content (1/3 width) */}
               <div className="text-white md:col-span-1 text-center md:text-left">
-                <p
-                  className="
+                <p className="
         text-base 
         sm:text-lg 
         md:text-xl 
         lg:text-[22px] 
         xl:text-[24px] 
         2xl:text-[24px] 
-        font-foco font-light leading-relaxed
-      "
-                >
+        font-foco font-light leading-relaxed">
                   Perched along Al Khobar’s scenic corniche, Bayfront offers
                   breathtaking Arabian Gulf views. It provides effortless access
                   to premium amenities and major highways. Perfect for
@@ -457,32 +523,53 @@ const Bayfront = () => {
                 {/* Button */}
                 <button
                   onClick={handleFormClick}
+                  onMouseEnter={() => setIsEnquireHover(true)}
+                  onMouseLeave={() => setIsEnquireHover(false)}
                   className="
-    mt-4 sm:mt-5 md:mt-6 lg:mt-8 
-    px-4 sm:px-5 md:px-6 lg:px-8 
-    py-2 sm:py-2.5 md:py-3 text-[20px]
-    border border-white text-white 
-    hover:bg-white hover:text-[#C07D4A] 
-    transition 
-    font-foco font-medium
-  "
+          relative mt-4 sm:mt-5 md:mt-6 lg:mt-8
+          px-4 sm:px-5 md:px-6 lg:px-8
+          py-2 sm:py-2.5 md:py-3 text-[20px]
+          border border-white text-white
+          overflow-hidden
+          font-foco font-medium
+          transition-colors duration-500
+          group
+        "
                 >
-                  Enquire Now
+                  <span className="relative z-10 group-hover:text-[#3F7881]">
+                    Enquire Now
+                  </span>
+                  {/* Half-circle animation */}
+                  <span
+                    className="absolute left-1/2 bottom-0 w-[200%] h-[200%]
+            bg-white rounded-full
+            -translate-x-1/2 translate-y-full
+            transition-transform duration-700 ease-out
+            group-hover:translate-y-1/2"
+                  />
                 </button>
               </div>
 
               {/* Right Image (2/3 width) */}
-              <div className="md:col-span-2">
-                <img
-                  src={image} // replace with your image import
-                  alt="Bayfront"
-                  className="
-          w-full 
-          h-[240px] sm:h-[300px] md:h-[400px] lg:h-[300px] xl:h-[400px] 2xl:h-[500px]
-          object-cover
-        "
-                />
-              </div>
+             <div className="md:col-span-2">
+  <AnimatePresence mode="wait">
+    <motion.img
+      key={isEnquireHover ? "enquire" : "default"}
+      src={isEnquireHover ? enquire : image}
+      alt="Bayfront"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="
+        w-full 
+        h-[240px] sm:h-[300px] md:h-[400px] lg:h-[300px] xl:h-[400px] 2xl:h-[500px]
+        object-cover
+        transition-all duration-200
+      "
+    />
+  </AnimatePresence>
+</div>
             </div>
           </div>
 
@@ -515,7 +602,6 @@ const Bayfront = () => {
                         className="absolute w-[373px] h-[383px] top-[668px] left-[1547px] "
                         alt="Bayfront resort aerial view"
                         src={rectangle}
-                        
                       />
 
                       {/* Normal image */}
@@ -523,11 +609,14 @@ const Bayfront = () => {
                         className="absolute w-[394px] h-80 top-[1010px] left-[520px] "
                         alt="Bayfront beach facilities"
                         src={vector}
-                       
                       />
 
                       {/* Rectangle2 */}
-                      <img
+                      <motion.img
+                        initial={{ y: -200, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }} // run animation when visible
+                        viewport={{ once: true, amount: 0.3 }} // triggers when 30% of element is visible
+                        transition={{ duration: 1, ease: "easeOut" }}
                         className="absolute w-[494px] h-[564px] top-0 left-[352px] cursor-pointer"
                         alt="Bayfront resort interior design"
                         src={rectangle5}
@@ -535,7 +624,11 @@ const Bayfront = () => {
                       />
 
                       {/* Rectangle4 */}
-                      <img
+                      <motion.img
+                        initial={{ x: 300, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
                         className="absolute w-[536px] h-[437px] top-[316px] left-[1279px] cursor-pointer"
                         alt="Bayfront beachfront view"
                         src={rectangle2}
@@ -543,7 +636,11 @@ const Bayfront = () => {
                       />
 
                       {/* Rectangle5 */}
-                      <img
+                      <motion.img
+                        initial={{ y: 200, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
                         className="absolute w-[753px] h-[480px] top-[780px] left-[868px] cursor-pointer"
                         alt="Bayfront resort amenities"
                         src={rectangle4}
@@ -551,7 +648,11 @@ const Bayfront = () => {
                       />
 
                       {/* Rectangle6 */}
-                      <img
+                      <motion.img
+                        initial={{ x: -300, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
                         className="absolute w-[696px] h-[494px] top-[586px] left-[149px] cursor-pointer"
                         alt="Bayfront shoreline experience"
                         src={rectangle3}
@@ -566,11 +667,9 @@ const Bayfront = () => {
                         <br />
                         Bayfront seamlessly blends vibrant stores,
                         <br />
-                        panoramic rooftops,
-                       
-                        and adaptable event
+                        panoramic rooftops, and adaptable event
                         <br />
-                       venues. It offers brands an unmatched 
+                        venues. It offers brands an unmatched
                         <br />
                         setting to connect with customers
                         <br />
@@ -579,7 +678,11 @@ const Bayfront = () => {
                     </article>
 
                     {/* Rectangle3 positioned */}
-                    <img
+                    <motion.img
+                      initial={{ y: -300, opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 1, ease: "easeOut" }}
                       className="absolute w-[387px] h-[583px] top-[172px] left-[868px] cursor-pointer"
                       alt="Bayfront resort landscape"
                       src={rectangle1}
