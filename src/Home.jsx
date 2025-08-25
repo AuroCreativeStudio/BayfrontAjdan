@@ -21,7 +21,7 @@ import rectangle4 from "./assets/rectangle (4).png";
 import rectangle5 from "./assets/rectangle (5).png";
 import clippath from "./assets/clip-path-group.png";
 import { motion, AnimatePresence } from "framer-motion";
-import enquire from "./assets/enquiresec.webp"
+import enquire from "./assets/enquiresec.webp";
 
 import CountUp, { useCountUp } from "react-countup";
 
@@ -33,10 +33,10 @@ const CarouselSlider = ({ images, currentIndex }) => (
     <AnimatePresence mode="wait">
       <motion.div
         key={currentIndex} // triggers animation on index change
-        initial={{ opacity: 0, scale: 1.05 }} // start slightly zoomed in and transparent
-        animate={{ opacity: 1, scale: 1 }}    // fade in and normalize scale
-        exit={{ opacity: 0, scale: 1.05 }}    // fade out and slightly zoomed
-        transition={{ duration: 0.7, ease: "easeInOut" }}
+        initial={{ scale: 1.1 }} // start zoomed in
+        animate={{ scale: 1 }} // zoom out to normal
+        exit={{ scale: 1.1 }} // zoom back in when leaving
+        transition={{ duration: 0.6, ease: "easeInOut" }}
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${images[currentIndex]})` }}
       />
@@ -91,12 +91,14 @@ const Bayfront = () => {
   };
 
   // Auto-scroll effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCarouselIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+// Auto-scroll effect
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCarouselIndex((prevIndex) => (prevIndex + 1) % images.length);
+  }, 3000); // 4 seconds instead of 2
+  return () => clearInterval(interval);
+}, []);
+
 
   // Thumbnail click handler
   const handleThumbClick = (index, e) => {
@@ -186,7 +188,7 @@ const Bayfront = () => {
                 className="text-[171px] font-ivy ml-[-6px] md:text-9xl"
                 initial={{ x: 300, opacity: 0 }} // start 300px to the right, invisible
                 animate={{ x: 0, opacity: 1 }} // slide to original position, fully visible
-                transition={{ duration: 1.5, ease: "easeOut" }} // duration & easing
+                transition={{ duration: 2.5, ease: "easeOut" }} // duration & easing
               >
                 BAYFRONT
               </motion.h1>
@@ -255,10 +257,11 @@ const Bayfront = () => {
                   src={img}
                   onClick={(e) => handleThumbClick(i, e)}
                   className={`object-cover h-24 w-36 border cursor-pointer transition
-                    ${i === carouselIndex
-                    ? "scale-105 border-2 border-white"
-                    : "border-white/50 opacity-80 hover:opacity-100"
-                  }`}
+                    ${
+                      i === carouselIndex
+                        ? "scale-105 border-2 border-white"
+                        : "border-white/50 opacity-80 hover:opacity-100"
+                    }`}
                   alt={`Thumbnail ${i}`}
                 />
               ))}
@@ -281,53 +284,47 @@ const Bayfront = () => {
         {/* Hero Section - Small & Medium Screens */}
         <section
           ref={heroSectionRef}
-          className={`relative w-full block lg:hidden ${
-            isScrollable ? "h-screen sticky top-0" : "fixed h-screen"
-          }`}
+          className={`relative w-full block lg:hidden ${isScrollable ? "h-screen sticky top-0" : "fixed h-screen"}`}
           onClick={unlockScroll}
         >
-          {/* CarouselSlider as child */}
-          <CarouselSlider images={images} currentIndex={carouselIndex} />
+          {/* Background with Full Overlay */}
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-all duration-300"
+            style={{ backgroundImage: `url(${bgImage})` }}
+          >
+            <div className="absolute inset-0 bg-black/50"></div>
+          </div>
 
           {/* Content Centered */}
-          <div className="relative z-20 flex flex-col justify-start pt-12 items-center text-center text-white px-6 h-full md:h-auto">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-ivy font-bold">
-              BAYFRONT
-            </h1>
+          <div className="absolute inset-0 flex flex-col justify-start pt-24 items-center text-center text-white px-6 z-30">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-ivy font-bold">BAYFRONT</h1>
             <h2 className="mt-4 text-xl sm:text-2xl md:text-3xl font-ivy text-white">
               Where Luxury Meets the Sparkle <br /> of the Gulfside Shores
             </h2>
             <p className="mt-4 font-foco text-sm sm:text-base md:text-lg leading-relaxed text-gray-200 max-w-md">
-              Welcome to Bayfront, Saudi Arabia’s East Coast masterpiece, where
-              breathtaking Arabian Gulf views, avant-garde architecture, and a
-              luxurious beachfront lifestyle with world-class dining await you.
+              Welcome to Bayfront, Saudi Arabia’s East Coast masterpiece, where breathtaking Arabian Gulf views, avant-garde architecture,
+              and a luxurious beachfront lifestyle with world-class dining await you.
             </p>
-
-            {/* Button */}
             <a
               href="https://wa.me/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-3 font-foco font-bold text-[17px] text-white pointer-events-auto"
+              className="inline-flex items-center gap-2 mt-4 font-foco font-bold text-base sm:text-lg text-white"
             >
-              <img src={whatsapp} alt="whatsapp" />
+              <img src={whatsapp} alt="whatsapp" className="w-5 h-5" />
               Speak to our agents today
             </a>
           </div>
 
           {/* Logos above thumbnails */}
-          <div className="absolute bottom-44 left-0 w-full flex justify-center gap-6 items-center px-6 z-30">
-            <img
-              src={bayfrontLogo}
-              alt="Bayfront Logo"
-              className="h-8 sm:h-10"
-            />
+          <div className="absolute bottom-44 left-0 w-full flex justify-center gap-6 items-center px-6 z-40">
+            <img src={bayfrontLogo} alt="Bayfront Logo" className="h-8 sm:h-10" />
             <div className="w-[2px] h-6 bg-gray-300"></div>
             <img src={logo} alt="Logo" className="h-8 sm:h-10" />
           </div>
 
-          {/* Thumbnails with Carousel Dots (parent) */}
-          <div className="absolute z-30 pointer-events-auto bottom-4 right-4">
+          {/* Thumbnails with Carousel Dots */}
+          <div className="absolute z-40 pointer-events-auto bottom-4 right-4">
             <div className="flex gap-2">
               {images.map((img, i) => (
                 <img
@@ -335,20 +332,16 @@ const Bayfront = () => {
                   src={img}
                   onClick={(e) => handleThumbClick(i, e)}
                   className={`object-cover h-16 w-24 transition border border-white cursor-pointer hover:scale-105 sm:h-20 sm:w-28 md:h-24 md:w-36
-    ${i === carouselIndex ? "scale-105 border-2" : ""}`}
+            ${i === carouselIndex ? "scale-105 border-2" : ""}`}
                   alt={`Thumbnail ${i}`}
                 />
               ))}
             </div>
-
-            {/* Carousel dots indicator */}
             <div className="flex justify-start gap-2 mt-2">
               {images.map((_, i) => (
                 <div
                   key={i}
-                  className={`w-2 h-2 rounded-full transition ${
-                    i === carouselIndex ? "bg-white" : "bg-white/50"
-                  }`}
+                  className={`w-2 h-2 rounded-full transition ${i === carouselIndex ? "bg-white" : "bg-white/50"}`}
                 />
               ))}
             </div>
@@ -363,63 +356,62 @@ const Bayfront = () => {
           }`}
         >
           {/* Full Enquiry Form */}
-         <AnimatePresence>
-  {showFullForm && (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Background overlay */}
-      <div
-        className="absolute inset-0 backdrop-blur-sm bg-black/50"
-        onClick={() => setShowFullForm(false)}
-      ></div>
+          <AnimatePresence>
+            {showFullForm && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center">
+                {/* Background overlay */}
+                <div
+                  className="absolute inset-0 backdrop-blur-sm bg-black/50"
+                  onClick={() => setShowFullForm(false)}
+                ></div>
 
-      {/* Animated Form */}
-      <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}     // start small & hidden
-        animate={{ scale: 1, opacity: 1 }}       // grow to full size & visible
-        exit={{ scale: 0.5, opacity: 0 }}        // shrink back when closing
-        transition={{ duration: 0.4, ease: "easeOut" }} // smooth animation
-        className="bg-white p-6 w-96 max-w-[90%] relative z-50 rounded-lg shadow-lg"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={() => setShowFullForm(false)}
-          className="absolute text-xl text-black top-2 right-2"
-        >
-          ×
-        </button>
-        <h2 className="mb-4 text-lg font-foco font-bold text-black">
-          Enquiry Form
-        </h2>
-        <input
-          className="w-full p-2 mb-3 text-sm font-foco border"
-          placeholder="Property Title"
-          value="Bayfront"
-          readOnly
-        />
-        <input
-          className="w-full p-2 mb-3 text-sm font-foco border"
-          placeholder="Name"
-        />
-        <input
-          className="w-full p-2 mb-3 text-sm font-foco border"
-          placeholder="Email"
-        />
-        <input
-          className="w-full p-2 mb-3 text-sm font-foco border"
-          placeholder="Phone"
-        />
-        <textarea
-          className="w-full p-2 text-sm font-foco border"
-          placeholder="Message"
-        />
-        <button className="w-full px-4 py-2 mt-3 text-sm text-white bg-[#0d202e]">
-          Submit
-        </button>
-      </motion.div>
-    </div>
-  )}
-</AnimatePresence>
-
+                {/* Animated Form */}
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }} // start small & hidden
+                  animate={{ scale: 1, opacity: 1 }} // grow to full size & visible
+                  exit={{ scale: 0.5, opacity: 0 }} // shrink back when closing
+                  transition={{ duration: 0.4, ease: "easeOut" }} // smooth animation
+                  className="bg-white p-6 w-96 max-w-[90%] relative z-50 rounded-lg shadow-lg"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    onClick={() => setShowFullForm(false)}
+                    className="absolute text-xl text-black top-2 right-2"
+                  >
+                    ×
+                  </button>
+                  <h2 className="mb-4 text-lg font-foco font-bold text-black">
+                    Enquiry Form
+                  </h2>
+                  <input
+                    className="w-full p-2 mb-3 text-sm font-foco border"
+                    placeholder="Property Title"
+                    value="Bayfront"
+                    readOnly
+                  />
+                  <input
+                    className="w-full p-2 mb-3 text-sm font-foco border"
+                    placeholder="Name"
+                  />
+                  <input
+                    className="w-full p-2 mb-3 text-sm font-foco border"
+                    placeholder="Email"
+                  />
+                  <input
+                    className="w-full p-2 mb-3 text-sm font-foco border"
+                    placeholder="Phone"
+                  />
+                  <textarea
+                    className="w-full p-2 text-sm font-foco border"
+                    placeholder="Message"
+                  />
+                  <button className="w-full px-4 py-2 mt-3 text-sm text-white bg-[#0d202e]">
+                    Submit
+                  </button>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
 
           {/* SECTION-2 */}
           <div className="text-center py-16 px-4">
@@ -504,14 +496,16 @@ const Bayfront = () => {
             <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
               {/* Left Content (1/3 width) */}
               <div className="text-white md:col-span-1 text-center md:text-left">
-                <p className="
+                <p
+                  className="
         text-base 
         sm:text-lg 
         md:text-xl 
         lg:text-[22px] 
         xl:text-[24px] 
         2xl:text-[24px] 
-        font-foco font-light leading-relaxed">
+        font-foco font-light leading-relaxed"
+                >
                   Perched along Al Khobar’s scenic corniche, Bayfront offers
                   breathtaking Arabian Gulf views. It provides effortless access
                   to premium amenities and major highways. Perfect for
@@ -551,25 +545,25 @@ const Bayfront = () => {
               </div>
 
               {/* Right Image (2/3 width) */}
-             <div className="md:col-span-2">
-  <AnimatePresence mode="wait">
-    <motion.img
-      key={isEnquireHover ? "enquire" : "default"}
-      src={isEnquireHover ? enquire : image}
-      alt="Bayfront"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="
+              <div className="md:col-span-2">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={isEnquireHover ? "enquire" : "default"}
+                    src={isEnquireHover ? enquire : image}
+                    alt="Bayfront"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="
         w-full 
         h-[240px] sm:h-[300px] md:h-[400px] lg:h-[300px] xl:h-[400px] 2xl:h-[500px]
         object-cover
         transition-all duration-200
       "
-    />
-  </AnimatePresence>
-</div>
+                  />
+                </AnimatePresence>
+              </div>
             </div>
           </div>
 
@@ -617,7 +611,12 @@ const Bayfront = () => {
                         whileInView={{ y: 0, opacity: 1 }} // run animation when visible
                         viewport={{ once: true, amount: 0.3 }} // triggers when 30% of element is visible
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="absolute w-[494px] h-[564px] top-0 left-[352px] cursor-pointer"
+                         whileHover={{
+                          scale: 1.03,
+                          zIndex: 50,
+                          // boxShadow: "0px 20px 40px rgba(0,0,0,0.6)",
+                        }}
+                        className="absolute w-[494px] h-[564px] top-0 left-[352px] cursor-pointer transition-all duration-100"
                         alt="Bayfront resort interior design"
                         src={rectangle5}
                         onClick={() => setLightboxImage(rectangle5)}
@@ -629,7 +628,12 @@ const Bayfront = () => {
                         whileInView={{ x: 0, opacity: 1 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="absolute w-[536px] h-[437px] top-[316px] left-[1279px] cursor-pointer"
+                         whileHover={{
+                          scale: 1.03,
+                          zIndex: 50,
+                          // boxShadow: "0px 20px 40px rgba(0,0,0,0.6)",
+                        }}
+                        className="absolute w-[536px] h-[437px] top-[316px] left-[1279px] cursor-pointer transition-all duration-100"
                         alt="Bayfront beachfront view"
                         src={rectangle2}
                         onClick={() => setLightboxImage(rectangle2)}
@@ -641,23 +645,37 @@ const Bayfront = () => {
                         whileInView={{ y: 0, opacity: 1 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="absolute w-[753px] h-[480px] top-[780px] left-[868px] cursor-pointer"
+                         whileHover={{
+                          scale: 1.03,
+                          zIndex: 50,
+                          // boxShadow: "0px 20px 40px rgba(0,0,0,0.6)",
+                        }}
+                        className="absolute w-[753px] h-[480px] top-[780px] left-[868px] cursor-pointer transition-all duration-100"
                         alt="Bayfront resort amenities"
                         src={rectangle4}
                         onClick={() => setLightboxImage(rectangle4)}
                       />
 
                       {/* Rectangle6 */}
-                      <motion.img
-                        initial={{ x: -300, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                        className="absolute w-[696px] h-[494px] top-[586px] left-[149px] cursor-pointer"
-                        alt="Bayfront shoreline experience"
-                        src={rectangle3}
-                        onClick={() => setLightboxImage(rectangle3)}
-                      />
+                    <motion.div
+  initial={{ y: -300, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 1, ease: "easeOut" }}
+  className="absolute w-[696px] h-[494px] top-[586px] left-[149px] overflow-hidden"
+>
+  <motion.img
+    src={rectangle3}
+    alt="Bayfront shoreline experience"
+    onClick={() => setLightboxImage(rectangle3)}
+    className="w-full h-full object-cover cursor-pointer"
+    initial={{ scale: 1 }}
+    whileInView={{ scale: 1.50 }}
+    viewport={{ once: true, amount: 0.20 }}
+    transition={{ duration: 15, ease: "easeOut" }}
+  />
+</motion.div>
+
                     </div>
 
                     {/* Text block */}
@@ -678,16 +696,31 @@ const Bayfront = () => {
                     </article>
 
                     {/* Rectangle3 positioned */}
-                    <motion.img
-                      initial={{ y: -300, opacity: 0 }}
-                      whileInView={{ y: 0, opacity: 1 }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 1, ease: "easeOut" }}
-                      className="absolute w-[387px] h-[583px] top-[172px] left-[868px] cursor-pointer"
-                      alt="Bayfront resort landscape"
-                      src={rectangle1}
-                      onClick={() => setLightboxImage(rectangle1)}
-                    />
+<motion.div
+  initial={{ y: -300, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 1, ease: "easeOut" }}
+  className="absolute w-[387px] h-[583px] top-[172px] left-[868px] overflow-hidden"
+>
+  <motion.img
+    src={rectangle1}
+    alt="Bayfront resort landscape"
+    onClick={() => setLightboxImage(rectangle1)}
+    className="w-full h-full object-cover cursor-pointer will-change-transform"
+    initial={{ scale: 1 }}
+    whileInView={{ scale: 1.50 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 15, ease: "easeOut" }} 
+    style={{
+      transformOrigin: "top center", // 👈 anchor zoom from top
+    }}
+  />
+</motion.div>
+
+
+
+
                   </div>
                 </div>
               </section>
